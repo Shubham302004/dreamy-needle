@@ -1,0 +1,405 @@
+@layer base{html,body{margin:0;padding:0;overflow-x:hidden;max-width:100vw;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#b95469 #f7f3ec;overscroll-behavior-y:none;}
+.no-scrollbar::-webkit-scrollbar{display:none;}
+.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:#f7f3ec;}
+::-webkit-scrollbar-thumb{background:#b95469;border-radius:9999px;border:2px solid #f7f3ec;}
+::-webkit-scrollbar-thumb:hover{background:#9a3c51;}
+section[id],div[id]{scroll-margin-top:5.5rem;}
+/* Artisanal Needlecraft Animations */
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0.8deg); }
+}
+@keyframes gentlePulseGlow {
+  0%, 100% { box-shadow: 0 10px 30px -10px rgba(154, 60, 81, 0.25); }
+  50% { box-shadow: 0 18px 40px -6px rgba(154, 60, 81, 0.45); }
+}
+@keyframes sparkleFloat {
+  0% { transform: translateY(0px) rotate(0deg) scale(0.9); opacity: 0.35; }
+  50% { transform: translateY(-12px) rotate(18deg) scale(1.1); opacity: 0.85; }
+  100% { transform: translateY(0px) rotate(0deg) scale(0.9); opacity: 0.35; }
+}
+@keyframes stitchDash {
+  to { stroke-dashoffset: -40; }
+}
+@keyframes shimmerShine {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.hero-hoop-float {
+  animation: heroFloat 6s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+.btn-shimmer:hover::after {
+  animation: shimmerShine 1.25s infinite;
+}
+
+/* Creation Card Hover Effects */
+.creation-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease, opacity 0.3s ease;
+  border: 1px solid transparent;
+}
+.creation-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px -10px rgba(78, 50, 40, 0.12);
+  border-color: rgba(185, 84, 105, 0.25);
+}
+.creation-card:hover .card-arrow {
+  transform: translateX(4px);
+}
+.card-arrow {
+  transition: transform 0.25s ease;
+}
+
+/* Scroll reveal utility — hidden only when JS is available */
+.has-js .reveal-init {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+.has-js .reveal-init.reveal-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  will-change: opacity, transform;
+}
+
+/* ===== SCROLL ANIMATION SYSTEM ===== */
+
+/* E. "Fabric curtain" reveal for catalog card images — transform-only (GPU),
+   no main-thread clip-path painting while cards are fading in */
+.has-js .creation-card.reveal-init > div:first-child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #ffffff;
+  transform: translateY(0);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d, 0ms) + 100ms);
+}
+.has-js .creation-card.reveal-init.reveal-visible > div:first-child::after {
+  transform: translateY(101%);
+}
+
+/* B-2. Eyebrow labels draw a brass dashed stitch underline on reveal */
+.has-js span.font-label-sm.uppercase.tracking-widest:not(.flex) {
+  position: relative;
+}
+.has-js span.font-label-sm.uppercase.tracking-widest:not(.flex)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 2px;
+  background-image: repeating-linear-gradient(90deg, #c89b53 0 6px, transparent 6px 13px);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d, 0ms) + 300ms);
+}
+.has-js .reveal-visible span.font-label-sm.uppercase.tracking-widest:not(.flex)::after {
+  transform: scaleX(1);
+}
+
+/* A. Thread scroll-progress bar with riding needle */
+#thread-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 60;
+  pointer-events: none;
+}
+#thread-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #9a3c51, #b95469 55%, #c89b53);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+.thread-needle {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  filter: drop-shadow(0 1px 2px rgba(78, 50, 40, 0.4));
+  will-change: transform;
+}
+
+/* B-1. Self-stitching thread connector through the How-to-Order steps */
+#steps-grid {
+  position: relative;
+}
+#step-thread {
+  position: absolute;
+  top: 56px;
+  left: 56px;
+  right: 56px;
+  height: 2px;
+  z-index: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, #c89b53 0 7px, transparent 7px 15px);
+  clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0);
+}
+@media (max-width: 767px) {
+  #step-thread {
+    top: 40px;
+    bottom: 40px;
+    left: 26px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background-image: repeating-linear-gradient(180deg, #c89b53 0 7px, transparent 7px 15px);
+    clip-path: inset(0 0 calc((1 - var(--p, 0)) * 100%) 0);
+  }
+}
+
+/* DESIGN.md — hand-stitched dashed basting border on hover */
+.creation-card,
+.step-card,
+#fabrics .grid > div {
+  position: relative;
+}
+.creation-card::after,
+.step-card::after,
+#fabrics .grid > div::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed #1c1c18;
+  border-radius: 0.65rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+#fabrics .grid > div::after {
+  inset: 5px;
+  border-radius: 1.1rem;
+}
+.creation-card:hover::after,
+.step-card:hover::after,
+#fabrics .grid > div:hover::after {
+  opacity: 1;
+}
+
+/* Mobile slide-down menu */
+#mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#mobile-menu.open {
+  max-height: 420px;
+}
+#menu-toggle .material-symbols-outlined {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#menu-toggle[aria-expanded="true"] .material-symbols-outlined {
+  transform: rotate(90deg);
+}
+
+/* Accordion transition styles */
+.faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+.faq-content.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.faq-content-inner {
+  overflow: hidden;
+}
+.faq-icon {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-icon.is-open {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .has-js .reveal-init {
+    opacity: 1;
+    transform: none;
+  }
+  .has-js .creation-card.reveal-init > div:first-child::after {
+    content: none;
+  }
+}
+
+/* ============================================================
+   Upgrade 1: Scroll-driven stitching thread
+   ============================================================ */
+main {
+  position: relative;
+}
+#stitch-thread {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+@media (max-width: 767px) {
+  .px-margin-mobile {
+    padding-left: 2.15rem !important;
+    padding-right: 1.15rem !important;
+  }
+}
+#thread-knot,
+#stitch-needle {
+  will-change: transform, opacity;
+  transition: opacity 0.35s ease;
+}
+.creation-card,
+.step-card,
+#fabrics .grid > div {
+  z-index: 2;
+}
+
+/* ============================================================
+   Upgrade 2: Floating WhatsApp button
+   ============================================================ */
+.wa-fab {
+  position: fixed;
+  right: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  width: 54px;
+  height: 54px;
+  border-radius: 9999px;
+  background: #128C72;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  box-shadow: 0 10px 26px -8px rgba(18, 140, 114, 0.55), 0 4px 10px -3px rgba(78, 50, 40, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+@media (max-width: 767px) {
+  .wa-fab {
+    width: 48px;
+    height: 48px;
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+.wa-fab > svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 767px) {
+  .wa-fab > svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+.wa-fab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid #128C72;
+  pointer-events: none;
+  animation: wa-fab-pulse 1.8s ease-out 2 forwards;
+}
+@keyframes wa-fab-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.wa-fab:hover {
+  transform: scale(1.07);
+  box-shadow: 0 14px 32px -8px rgba(18, 140, 114, 0.65), 0 6px 14px -3px rgba(78, 50, 40, 0.3);
+}
+.wa-fab:focus-visible {
+  outline: 3px solid #9a3c51;
+  outline-offset: 3px;
+}
+.wa-fab-label {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translate(8px, -50%);
+  background: #1c1c18;
+  color: #fdf9f2;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 7px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.wa-fab:hover .wa-fab-label,
+.wa-fab:focus-visible .wa-fab-label {
+  transform: translate(0, -50%);
+  opacity: 1;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #9a3c51;
+  outline-offset: 2px;
+}
+@media (max-width: 767px) {
+  .wa-fab-label {
+    display: none;
+  }
+}
+
+/* Reduced motion: static full thread, no needle, no pulse */
+@media (prefers-reduced-motion: reduce) {
+  #stitch-needle {
+    display: none !important;
+  }
+  #thread-knot {
+    transition: none !important;
+  }
+  .wa-fab::after {
+    animation: none !important;
+    opacity: 0;
+  }
+  .wa-fab:hover {
+    transform: none;
+  }
+  .wa-fab-label {
+    transition: none;
+  }
+}
