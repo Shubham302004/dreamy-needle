@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Creations & Gallery (11 Styles) — Dreamy Needle Atelier</title>
+  <meta
+    content="Dreamy Needle by Shruti — 100% hand-stitched custom embroidery. Personalized tees, shirts, kurtis, denim, handkerchiefs, and keepsake hoop art. Pan-India tracked delivery."
+    name="description">
+  <meta content="#fdf9f2" name="theme-color">
+  <!-- Open Graph & Social Cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dreamy Needle by Shruti">
+  <meta property="og:title" content="Dreamy Needle — Handcrafted Embroidery Atelier">
+  <meta property="og:description" content="100% hand-stitched custom embroidery on T-shirts, shirts, kurtis, denim, handkerchiefs, and keepsake hoop art. Pan-India tracked delivery.">
+  <meta property="og:image" content="assets/img/profile-logo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dreamy Needle — Handcrafted Embroidery Atelier">
+  <meta name="twitter:description" content="100% hand-stitched custom embroidery by Shruti. Pan-India tracked delivery.">
+  <meta name="twitter:image" content="assets/img/profile-logo.jpg">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AA%A1%3C/text%3E%3C/svg%3E">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+  <!-- Tailwind CSS & Custom Theme -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: '#fdf9f2',
+            'surface-card': '#ffffff',
+            'surface-tint': '#f5ede3',
+            primary: '#9a3c51',
+            'primary-hover': '#7f2e41',
+            'primary-light': '#ffd9de',
+            secondary: '#496549',
+            'secondary-light': '#d9ebd8',
+            accent: '#956d2a',
+            'accent-light': '#faedd4',
+            'warm-gray': '#73665e',
+            'charcoal': '#23201e'
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            script: ['Great Vibes', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-surface font-sans text-charcoal antialiased selection:bg-primary-light selection:text-primary">
+
+        <!-- Fixed Header (Persistent Desktop & Mobile Navigation) -->
+  <header class="fixed top-0 w-full z-50 bg-surface/92 backdrop-blur-md border-b border-stone-200/60 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto h-16 sm:h-20 px-4 sm:px-8 flex items-center justify-between">
+      <!-- Logo -->
+      <a class="flex items-center gap-2.5 sm:gap-3 group" href="index.html" data-tab="home">
+        <img alt="Dreamy Needle Logo" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-primary/25 shadow-sm transition-transform group-hover:scale-105"
+          src="assets/img/profile-logo.jpg" onerror="this.onerror=null;this.src='assets/img/dreamy-needle-embroidery-by-shruti-logo.jpg'">
+        <div class="flex flex-col">
+          <span class="font-serif text-lg sm:text-2xl font-bold tracking-tight text-charcoal group-hover:text-primary transition-colors leading-tight">Dreamy Needle</span>
+          <span class="text-[10px] sm:text-[11px] font-semibold text-primary uppercase tracking-widest">By Shruti</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation (Smooth Sliding Underline, Zero-Blink) -->
+      <nav aria-label="Primary" class="hidden md:flex items-center gap-7 text-sm font-semibold text-stone-700 relative" id="desktop-nav">
+        <a class="nav-link hover:text-primary transition-colors" data-tab="home" href="index.html">
+          <span>Home</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a class="nav-link text-primary font-bold active" data-tab="creations" href="creations.html">
+          <span>Creations &amp; Gallery</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a class="nav-link hover:text-primary transition-colors" data-tab="custom-order" href="custom-order.html">
+          <span>Custom Ordering</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a class="nav-link hover:text-primary transition-colors" data-tab="about" href="about.html">
+          <span>About Studio</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a class="nav-link hover:text-primary transition-colors" data-tab="contact" href="contact.html">
+          <span>Contact &amp; FAQ</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a class="nav-link hover:text-primary transition-colors" data-tab="reviews" href="index.html#reviews-section">
+          <span>Reviews</span>
+          <span class="nav-indicator"></span>
+        </a>
+      </nav>
+
+      <!-- Mobile Toggle -->
+      <div class="flex items-center md:hidden">
+        <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu"
+          class="inline-flex items-center justify-center w-10 h-10 rounded-xl text-stone-700 hover:text-primary hover:bg-stone-100 transition-colors"
+          id="menu-toggle" type="button">
+          <span class="material-symbols-outlined text-[26px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="bg-surface/98 backdrop-blur-md md:hidden" id="mobile-menu">
+      <nav aria-label="Mobile" class="flex flex-col px-4 py-3 space-y-1" id="mobile-nav">
+        <a class="mobile-nav-link text-stone-700 hover:text-primary hover:bg-stone-100/80 py-2.5 px-3 rounded-xl text-sm flex items-center justify-between transition-colors" data-tab="home" href="index.html">
+          <span>Home</span>
+          <span class="material-symbols-outlined text-[18px]">home</span>
+        </a>
+        <a class="mobile-nav-link text-primary font-bold py-2.5 px-3 rounded-xl bg-primary/10 text-sm flex items-center justify-between transition-colors" data-tab="creations" href="creations.html">
+          <span>Creations &amp; Gallery (11 Styles)</span>
+          <span class="material-symbols-outlined text-[18px]">palette</span>
+        </a>
+        <a class="mobile-nav-link text-stone-700 hover:text-primary hover:bg-stone-100/80 py-2.5 px-3 rounded-xl text-sm flex items-center justify-between transition-colors" data-tab="custom-order" href="custom-order.html">
+          <span>Custom Ordering &amp; Pricing</span>
+          <span class="material-symbols-outlined text-[18px]">design_services</span>
+        </a>
+        <a class="mobile-nav-link text-stone-700 hover:text-primary hover:bg-stone-100/80 py-2.5 px-3 rounded-xl text-sm flex items-center justify-between transition-colors" data-tab="about" href="about.html">
+          <span>About Studio &amp; Shruti</span>
+          <span class="material-symbols-outlined text-[18px]">person</span>
+        </a>
+        <a class="mobile-nav-link text-stone-700 hover:text-primary hover:bg-stone-100/80 py-2.5 px-3 rounded-xl text-sm flex items-center justify-between transition-colors" data-tab="contact" href="contact.html">
+          <span>Contact &amp; FAQ</span>
+          <span class="material-symbols-outlined text-[18px]">help_outline</span>
+        </a>
+        <a class="mobile-nav-link text-stone-700 hover:text-primary hover:bg-stone-100/80 py-2.5 px-3 rounded-xl text-sm flex items-center justify-between transition-colors" data-tab="reviews" href="index.html#reviews-section">
+          <span>Customer Reviews</span>
+          <span class="material-symbols-outlined text-[18px]">rate_review</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Area with Authentic Hand-Stitched Seam & Instant SPA Views -->
+  <main class="w-full pt-16 sm:pt-20">
+    <svg id="stitch-canvas" aria-hidden="true" fill="none">
+      <defs>
+        <!-- Progressive mask that reveals running stitches one by one -->
+        <mask id="stitch-reveal-mask">
+          <path id="mask-path" fill="none" stroke="#ffffff" stroke-width="28" stroke-linecap="round" />
+        </mask>
+        <!-- Metallic Steel Needle Gradient -->
+        <linearGradient id="needle-steel-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="25%" stop-color="#eae5dd" />
+          <stop offset="65%" stop-color="#a8a197" />
+          <stop offset="100%" stop-color="#4f4943" />
+        </linearGradient>
+      </defs>
+      <!-- Faint tailor's chalk guide line marking the pattern on cloth -->
+      <path id="thread-guide" stroke-linecap="round" />
+      <!-- Cloth punctures: piercings where needle enters/exits fabric -->
+      <path id="thread-punctures" stroke-linecap="round" />
+      <!-- Genuine hand-embroidered running stitch thread (revealed progressively through mask) -->
+      <path id="thread-path" mask="url(#stitch-reveal-mask)" stroke-linecap="round" />
+      <!-- Starting knot -->
+      <circle id="thread-knot" r="3.8" />
+      <!-- Handcrafted Artisanal Embroidery Needle (Origin 0,0 at Eye) -->
+      <g id="stitch-needle" class="stitch-needle-wrap" opacity="0">
+        <title>Scrollable embroidery needle</title>
+        <!-- Needle drop shadow on linen -->
+        <ellipse cx="16" cy="4" rx="22" ry="3" fill="rgba(45, 25, 20, 0.28)" />
+        <!-- Blunt tail behind eye -->
+        <path d="M-8 0 C -8 -2, -4 -2.2, 0 -2.2 L 0 2.2 C -4 2.2, -8 2, -8 0 Z" fill="#6d655d" />
+        <!-- Polished Steel Needle Shaft -->
+        <path d="M 0 -2.2 L 32 -1.8 L 44 0 L 32 1.8 L 0 2.2 Z" fill="url(#needle-steel-grad)" stroke="#3e3832" stroke-width="0.8" stroke-linejoin="round" />
+        <!-- Metallic specular highlight line along top edge of shaft -->
+        <path d="M 1 -1 L 34 -0.6 L 43 0" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" opacity="0.9" />
+        <!-- Sharp tapered piercing point -->
+        <path d="M 32 -1.8 L 46 0 L 32 1.8 Z" fill="#e8e4dc" stroke="#4a433b" stroke-width="0.6" />
+        <!-- Micro glint on tip -->
+        <circle cx="44.5" cy="0" r="0.7" fill="#ffffff" />
+        <!-- Brass/Gold Plated Needle Eye Rim -->
+        <ellipse cx="0" cy="0" rx="3.8" ry="1.9" fill="#c49348" stroke="#7d5924" stroke-width="0.6" />
+        <!-- Inner hole where thread threads through -->
+        <ellipse cx="0" cy="0" rx="2.4" ry="1.1" fill="#1f1813" />
+        <!-- Crimson Cotton Thread Loop entering the eye -->
+        <path d="M -14 0 C -10 0, -4 0, 0 0" stroke="#9a3c51" stroke-width="2.6" stroke-linecap="round" fill="none" />
+        <path d="M -14 0 C -9 -2, -3 -2, 0 0 C 3 2, 8 4, 12 3" stroke="#9a3c51" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.85" />
+      </g>
+    </svg>
+
+    <!-- TAB VIEW 1: HOME -->
+    <div id="view-home" class="tab-view view-hidden" data-view="home">
+     <!-- HERO SECTION (Featuring Official Logo as Requested) -->
+<section class="relative w-full overflow-hidden page-container py-10 sm:py-16 lg:py-20">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+<!-- Hero Text -->
+<div class="lg:col-span-7 flex flex-col items-start space-y-5 sm:space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-sm text-xs font-semibold text-stone-700">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>100% Hand-Stitched</span>
+<span class="text-stone-300">•</span>
+<span>Handmade in India</span>
+<span class="text-stone-300">•</span>
+<span class="text-primary font-bold">Pan-India Delivery</span>
+</div>
+<h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-charcoal leading-[1.18] tracking-tight">
+            Handcrafted Embroidery, <br/>
+<span class="font-script text-4xl sm:text-6xl lg:text-7xl font-normal text-primary inline-block">Made Just for You</span>
+</h1>
+<p class="text-sm sm:text-base lg:text-lg text-stone-600 leading-relaxed max-w-2xl">
+            Welcome to Dreamy Needle by Shruti. We craft bespoke hand-stitched keepsakes on T-shirts, shirts, kurtis, denim, handkerchiefs, and framed wooden hoops. Every stitch is formed knot by knot with love, precision, and soul.
+          </p>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1 w-full sm:w-auto">
+<a class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover active:scale-95 text-white font-semibold text-sm px-6 py-3.5 rounded-xl shadow-md transition-all text-center" href="creations.html">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+<span>Explore All Creations</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 bg-white hover:bg-stone-50 active:scale-95 text-stone-800 border border-stone-300 font-semibold text-sm px-6 py-3.5 rounded-xl shadow-sm transition-all text-center" href="custom-order.html">
+<span class="material-symbols-outlined text-[18px]">design_services</span>
+<span>How Custom Ordering Works</span>
+</a>
+</div>
+<!-- Trust Badges -->
+<div class="pt-2 sm:pt-4 flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-stone-600 font-medium">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Colorfast French &amp; Indian Floss</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Send Your Clothes or Use Our Blanks</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Gift-Ready Box Packaging</span>
+</div>
+</div>
+</div>
+<!-- Hero Logo Showcase (Requested Logo Display) -->
+<div class="lg:col-span-5 flex justify-center reveal-init">
+<div class="relative w-full max-w-[280px] sm:max-w-sm">
+<div class="relative rounded-full overflow-hidden bg-white p-3 border-[6px] border-[#deb887]/70 shadow-2xl transition-all">
+<div class="rounded-full overflow-hidden aspect-square border-2 border-stone-200">
+<img alt="Dreamy Needle Embroidery by Shruti Logo" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/dreamy-needle-embroidery-by-shruti-logo.jpg"/>
+</div>
+</div>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-md border border-stone-200 flex items-center gap-2 whitespace-nowrap">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span class="text-xs font-bold text-charcoal">Original Studio Atelier</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+ <!-- VALUE PROPOSITION BAR --> 
+<section class="w-full bg-primary text-white py-5 page-container shadow-sm">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl text-primary-light">verified</span>
+<div>
+<p class="font-serif text-base sm:text-lg font-bold">100% Machine-Free Hand Embroidery</p>
+<p class="text-xs text-primary-light">Every single motif and letter is stitched with human care, precision, and passion.</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors" href="about.html">
+<span>Read Our Craft Story</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- FEATURED CREATIONS PREVIEW (Top 4) -->
+<section class="w-full page-container py-12 sm:py-16 max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10 reveal-init">
+<div>
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Featured Needlecraft</span>
+<h2 class="font-serif text-2xl sm:text-4xl font-bold text-charcoal mt-1">Popular Bespoke Creations</h2>
+<p class="text-xs sm:text-sm text-stone-600 mt-1">Explore our most requested custom styles or commission your own idea.</p>
+</div>
+<a class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary hover:text-primary-hover group" href="creations.html">
+<span>View All 11 Creations</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- 1. Custom T-Shirts -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col reveal-init">
+<div class="h-48 sm:h-52 w-full overflow-hidden relative">
+<img alt="Custom Embroidery on T-Shirts" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/custom-embroidery-on-t-shirts.jpeg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">T-Shirts</span>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-serif text-lg font-bold text-charcoal">Custom T-Shirt Embroidery</h3>
+<p class="text-xs text-stone-600 mt-1.5 leading-relaxed">Minimal chest monograms, pocket art, line drawings, and floral sprigs on organic cotton tees.</p>
+</div>
+<div class="pt-4 border-t border-stone-100 flex items-center justify-between mt-4">
+<span class="text-xs font-bold text-stone-900">From ₹449</span>
+<a class="text-xs font-bold text-primary hover:text-primary-hover inline-flex items-center gap-1" href="creations.html">
+<span>Details</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- 2. Shirts & Collar Tips -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col reveal-init">
+<div class="h-48 sm:h-52 w-full overflow-hidden relative">
+<img alt="Embroidery Designs on Shirts" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/embroidery-designs-on-shirts.jpeg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">Shirts</span>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-serif text-lg font-bold text-charcoal">Shirt &amp; Collar Detailing</h3>
+<p class="text-xs text-stone-600 mt-1.5 leading-relaxed">Sophisticated collar motifs, sleeve cuff monograms, and pocket embellishments for linen and formal shirts.</p>
+</div>
+<div class="pt-4 border-t border-stone-100 flex items-center justify-between mt-4">
+<span class="text-xs font-bold text-stone-900">From ₹549</span>
+<a class="text-xs font-bold text-primary hover:text-primary-hover inline-flex items-center gap-1" href="creations.html">
+<span>Details</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- 3. Denim & Jeans -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col reveal-init">
+<div class="h-48 sm:h-52 w-full overflow-hidden relative">
+<img alt="Customized Jeans &amp; Denim" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/customized-jeans-amp-denim-embroidery.jpeg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">Denim</span>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-serif text-lg font-bold text-charcoal">Custom Denim &amp; Jeans</h3>
+<p class="text-xs text-stone-600 mt-1.5 leading-relaxed">Turn your favorite jeans or denim jackets into wearable statement art with botanical and text motifs.</p>
+</div>
+<div class="pt-4 border-t border-stone-100 flex items-center justify-between mt-4">
+<span class="text-xs font-bold text-stone-900">From ₹699</span>
+<a class="text-xs font-bold text-primary hover:text-primary-hover inline-flex items-center gap-1" href="creations.html">
+<span>Details</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- 4. Framed Hoop Keepsakes -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col reveal-init">
+<div class="h-48 sm:h-52 w-full overflow-hidden relative">
+<img alt="Special Dates &amp; Meaningful Designs" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/special-dates-amp-meaningful-designs.jpg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">Hoops</span>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-serif text-lg font-bold text-charcoal">Special Dates &amp; Calendar Hoops</h3>
+<p class="text-xs text-stone-600 mt-1.5 leading-relaxed">Embroidered wedding dates, baby birth announcements, and calendar hoops stretched in natural beechwood frames.</p>
+</div>
+<div class="pt-4 border-t border-stone-100 flex items-center justify-between mt-4">
+<span class="text-xs font-bold text-stone-900">From ₹899</span>
+<a class="text-xs font-bold text-primary hover:text-primary-hover inline-flex items-center gap-1" href="creations.html">
+<span>Details</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+ <!-- HOW IT WORKS OVERVIEW --> 
+<section class="w-full bg-stone-100/70 py-12 sm:py-16 page-container border-y border-stone-200/60">
+<div class="max-w-7xl mx-auto flex flex-col space-y-8 sm:space-y-10">
+<div class="text-center max-w-2xl mx-auto reveal-init">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Simple &amp; Personal</span>
+<h2 class="font-serif text-2xl sm:text-4xl font-bold text-charcoal mt-1">How Custom Ordering Works</h2>
+<p class="text-xs sm:text-sm text-stone-600 mt-2">Getting your custom embroidery stitched is as simple as sending a WhatsApp message.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+<div class="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col space-y-3 reveal-init">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-serif font-bold text-lg flex items-center justify-center">01</span>
+<h3 class="font-serif text-lg font-bold text-charcoal">Choose Item &amp; Fabric</h3>
+<p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Ship your own favorite shirt, kurti, or jeans to our studio, or choose from our curated supply of organic cotton tees and wooden hoops.
+            </p>
+</div>
+<div class="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col space-y-3 reveal-init">
+<span class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary font-serif font-bold text-lg flex items-center justify-center">02</span>
+<h3 class="font-serif text-lg font-bold text-charcoal">Share Your Design Idea</h3>
+<p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Send your name, special date, motif, photo, or rough sketch. Shruti will confirm thread shades and placement with you before starting.
+            </p>
+</div>
+<div class="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col space-y-3 reveal-init">
+<span class="w-10 h-10 rounded-xl bg-accent/10 text-accent font-serif font-bold text-lg flex items-center justify-center">03</span>
+<h3 class="font-serif text-lg font-bold text-charcoal">Hand-Stitched &amp; Delivered</h3>
+<p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Shruti stitches your order knot by knot with colorfast threads, wraps it in gift packaging with a handwritten note, and ships it with tracking.
+            </p>
+</div>
+</div>
+<div class="text-center pt-2">
+<a class="inline-flex items-center gap-2 bg-stone-900 hover:bg-stone-800 text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-xl transition-all shadow-sm" href="custom-order.html">
+<span>Try the Custom Order Message Builder</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+ <!-- CLIENT REVIEWS SECTION --> 
+<section class="w-full page-container py-14 sm:py-20 max-w-7xl mx-auto" id="reviews-section">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
+<div>
+<!-- Dynamically populated review statistics (no hardcoded ratings) -->
+<div class="mb-1" id="review-stats-container"></div>
+<h2 class="font-serif text-2xl sm:text-4xl font-bold text-charcoal">Client Love &amp; Verified Reviews</h2>
+<p class="text-xs sm:text-sm text-stone-600 mt-1">Real feedback from clients across India. Share your experience below—your review is saved directly to the studio showcase!</p>
+</div>
+<button class="open-review-modal-btn inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover active:scale-95 text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-xl shadow-sm transition-all cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">rate_review</span>
+<span>Write a Review</span>
+</button>
+</div>
+<!-- Reviews Dynamic Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="reviews-grid">
+<!-- Injected dynamically via script.js from reviews.json -->
+</div>
+</section>
+
+ <!-- CALL TO ACTION BANNER --> 
+<section class="w-full page-container py-10 sm:py-12 max-w-7xl mx-auto">
+<div class="bg-charcoal text-white rounded-3xl p-6 sm:p-12 text-center flex flex-col items-center space-y-4 sm:space-y-6 shadow-lg">
+<span class="text-xs uppercase font-bold tracking-widest text-primary-light">Start Your Commission</span>
+<h2 class="font-serif text-2xl sm:text-4xl font-bold max-w-2xl">Ready to turn your design idea into a hand-stitched reality?</h2>
+<p class="text-xs sm:text-base text-stone-300 max-w-xl">
+          Whether it’s a personalized gift for a loved one or a special piece for yourself, get in touch directly on WhatsApp, Instagram, or Email.
+        </p>
+<div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#128C72] hover:bg-[#0e745e] active:scale-95 text-white font-semibold text-sm px-6 py-3.5 rounded-xl shadow-md transition-all" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27d%20like%20to%20order%20a%20custom%20embroidery%20piece." rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>Chat on WhatsApp</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all" href="https://www.instagram.com/dreamy_needle_19_" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+<span>DM on Instagram</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover active:scale-95 text-white font-semibold text-sm px-6 py-3.5 rounded-xl shadow-md transition-all" href="mailto:dreamy.needle.19@gmail.com?subject=Custom%20Embroidery%20Commission&amp;body=Hi%20Shruti%2C%0A%0AI%20would%20like%20to%20commission%20a%20custom%20embroidery%20piece!%0A%0A-%20Item%20type%3A%20%0A-%20Design%20idea%2Fdescription%3A%20%0A-%20Preferred%20date%3A%20%0A-%20City%3A%20">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span>Email Studio</span>
+</a>
+</div>
+</div>
+</section>
+    </div>
+
+    <!-- TAB VIEW 2: CREATIONS & GALLERY -->
+    <div id="view-creations" class="tab-view active" data-view="creations">
+      <!-- Page Header & Filter --> 
+<section class="max-w-7xl mx-auto page-container pt-8 sm:pt-12 pb-6 sm:pb-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Catalog &amp; Lookbook</span>
+<h1 class="font-serif text-3xl sm:text-5xl font-bold text-charcoal mt-1">Our Handcrafted Creations</h1>
+<p class="text-stone-600 text-xs sm:text-base mt-2 max-w-2xl leading-relaxed">
+            Every garment, handkerchief, and hoop frame is an individual piece of art stitched by hand. Explore our 11 core categories below, each customized with your choice of names, dates, colors, or artwork.
+          </p>
+</div>
+<!-- Filter Pills (Scrollable on Mobile) -->
+<div class="flex gap-2 text-xs font-semibold overflow-x-auto no-scrollbar pb-1 sm:pb-0" id="category-filters">
+<button aria-pressed="true" class="filter-pill px-4 py-2 rounded-full cursor-pointer transition-all bg-primary text-white shadow-sm" data-filter="all" type="button">All (11)</button>
+<button aria-pressed="false" class="filter-pill px-4 py-2 rounded-full cursor-pointer transition-all bg-stone-100 text-stone-700 hover:bg-stone-200" data-filter="apparel" type="button">Wearable Apparel</button>
+<button aria-pressed="false" class="filter-pill px-4 py-2 rounded-full cursor-pointer transition-all bg-stone-100 text-stone-700 hover:bg-stone-200" data-filter="hoops" type="button">Hoop Art &amp; Dates</button>
+<button aria-pressed="false" class="filter-pill px-4 py-2 rounded-full cursor-pointer transition-all bg-stone-100 text-stone-700 hover:bg-stone-200" data-filter="keepsakes" type="button">Monograms &amp; Gifts</button>
+</div>
+</div>
+</section>
+ <!-- 11 Creations Grid --> 
+<section class="max-w-7xl mx-auto page-container py-6 pb-20">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="creations-grid">
+<!-- 1. Custom Embroidery on T-Shirts -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="apparel">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Custom Embroidery on T-Shirts" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/custom-embroidery-on-t-shirts.jpeg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">T-Shirts</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Custom Embroidery on T-Shirts</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Elevate casual comfort with custom pocket monograms, minimal continuous line art, delicate florals, or quirky chest illustrations on pure cotton tees.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Pocket Art</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Minimal Outlines</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">100% Bio-Wash Cotton</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">3-5 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹449</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27m%20interested%20in%20a%20custom%20embroidered%20T-shirt." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 2. Embroidery Designs on Shirts -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="apparel">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Embroidery Designs on Shirts" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/embroidery-designs-on-shirts.jpeg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Shirts</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Embroidery Designs on Shirts</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Sophisticated collar tip embellishments, subtle sleeve cuff monograms, and back-yoke botanical embroidery tailored for formal shirts and casual linen button-downs.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Collar Tips</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Cuff Monograms</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Linen &amp; Oxford</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">4-6 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹549</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27m%20interested%20in%20custom%20embroidery%20on%20a%20shirt." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 3. Personalized Kurti Embroidery -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="apparel">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Personalized Kurti Embroidery" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/personalized-kurti-embroidery.jpeg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Ethnic Wear</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Personalized Kurti Embroidery</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Hand-embroidered yoke detailing, delicate neckline borders, and custom motif placements that breathe timeless grace into your daily ethnic and festive wardrobe.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Yoke Detailing</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Neckline Florals</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Cotton &amp; Chanderi</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">5-7 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹899</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27m%20interested%20in%20custom%20kurti%20embroidery." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 4. Customized Jeans & Denim Embroidery -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="apparel">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Customized Jeans &amp; Denim Embroidery" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/customized-jeans-amp-denim-embroidery.jpeg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Denim</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Custom Jeans &amp; Denim Embroidery</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Add personality to your denim jackets and jeans with back-pocket monograms, waistbands, seam florals, or bold statements stitched with heavy-gauge thread.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Back Pockets</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Jacket Panels</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Sturdy Twill Thread</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">4-6 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹699</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27m%20interested%20in%20custom%20denim%20embroidery." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 5. Personalized Handkerchiefs -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="keepsakes">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Personalized Handkerchiefs" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/personalized-handkerchiefs.jpeg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Keepsakes</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Personalized Handkerchiefs</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Fine cambric cotton handkerchiefs with delicate initial monograms, wedding dates, or sentimental quotes. A timeless, touching heirloom gift for weddings and graduations.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Bridal Hankies</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Rolled Hem Cotton</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Monogram Initials</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">2-3 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹299</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27d%20like%20to%20order%20personalized%20handkerchiefs." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 6. Framed Embroidery Hoop Art -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="hoops">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Framed Embroidery Hoop Art" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/embroidery-hoop-art.jpg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Hoop Art</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Framed Embroidery Hoop Art</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Hand-stretched botanical hoops on unbleached linen. Featuring French knots, satin floral wreaths, and custom typography ready to hang on your wall.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Beechwood Hoops</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Botanical Wreaths</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Wall Ready</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">5-7 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹849</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27d%20like%20to%20order%20an%20embroidery%20hoop%20piece." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 7. Special Dates & Calendar Hoops -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="hoops">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Special Dates &amp; Meaningful Designs" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/special-dates-amp-meaningful-designs.jpg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Dates &amp; Hoops</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Special Dates &amp; Calendar Hoops</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Immortalize your anniversary, proposal date, or baby birth date with a hand-stitched mini calendar featuring a heart circling your special day.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Anniversary Gifts</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Birth Announcements</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Custom Colors</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">5-8 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹899</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27d%20like%20to%20order%20a%20special%20date%20calendar%20hoop." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 8. Name & Initial Monogramming -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="keepsakes">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Name &amp; Initial Monogramming" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/name-and-initial-embroidery.jpg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Monograms</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Name &amp; Initial Monograms</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Classic cursive, bold serif, or botanical entwined lettering stitched onto collars, pockets, towels, or hoops. Make any garment uniquely yours.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Multiple Calligraphy Styles</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Initial Lettering</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Wearable &amp; Hoops</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">3-4 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹399</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27d%20like%20to%20order%20name%20or%20initial%20monogramming." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 9. Unique Designs From Your Own Ideas -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="keepsakes">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Unique Designs From Your Own Ideas" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/unique-designs-from-your-own-ideas.jpg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Custom Ideas</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Your Custom Concept &amp; Doodles</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Have a hand-drawn sketch, a tattoo idea, a favorite pet illustration, or a personal quote? Shruti translates your concept into textured thread embroidery.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">From Photos / Sketches</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Pet Portraits</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Bespoke Design</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">4-8 days</strong></span>
+<span class="text-primary font-bold text-sm">Custom Quote</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%20have%20a%20unique%20custom%20design%20idea%20for%20embroidery." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 10. Occasion & Wedding Gifts -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="hoops">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Customized Occasion Gifts" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/customized-occasion-gifts.jpg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Gifts</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Occasion &amp; Wedding Keepsakes</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Memorable gifts for bridal showers, engagements, baby births, and milestone birthdays. Arrives packed in gift wrapping with a handwritten note.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Wedding Hoops</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Engagement Gifts</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Gift Packaging</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">5-8 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹999</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27d%20like%20to%20order%20an%20occasion%20or%20wedding%20gift." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 11. Simple & Elegant Aari Work on Kurtis -->
+<div class="creation-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-init" data-category="apparel">
+<div>
+<div class="h-60 w-full overflow-hidden relative">
+<img alt="Aari Work on Kurtis" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="assets/img/simple-amp-elegant-aari-work-on-kurtis.jpg"/>
+<span class="absolute top-3 right-3 bg-white/90 text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Aari Craft</span>
+</div>
+<div class="p-6">
+<h3 class="font-serif text-xl font-bold text-charcoal">Elegant Aari Work on Kurtis</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                Traditional Indian needle-hook embroidery featuring fine chain stitches, zari accents, and subtle beadwork along kurtis, dupattas, and ethnic blouses.
+              </p>
+<div class="mt-4 flex flex-wrap gap-2 text-xs text-stone-600 font-medium">
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Aari Hook Chain Stitch</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Zari Detailing</span>
+<span class="bg-stone-100 px-2.5 py-1 rounded-md">Festive Wear</span>
+</div>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4 border-t border-stone-100">
+<div class="flex items-center justify-between mb-4 text-xs font-semibold">
+<span class="text-stone-500">Turnaround: <strong class="text-stone-800">6-9 days</strong></span>
+<span class="text-primary font-bold text-sm">From ₹1,199</span>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-primary text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27m%20interested%20in%20aari%20work%20kurti%20embroidery." rel="noopener noreferrer" target="_blank">
+<span>Order on WhatsApp</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+ <!-- Client Reviews Banner --> 
+<section class="max-w-7xl mx-auto page-container pb-8">
+<div class="bg-white rounded-2xl p-6 sm:p-7 border border-stone-200/90 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div>
+<h4 class="font-serif font-bold text-base sm:text-lg text-charcoal">Real Client Stories &amp; Feedback</h4>
+<p class="text-xs text-stone-600">Read verified buyer stories or submit your own review for our community.</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-2 bg-stone-100 hover:bg-stone-200 text-charcoal hover:text-primary text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shrink-0" href="index.html#reviews-section">
+<span>Read &amp; Post Reviews</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+ <!-- Custom Commission Banner --> 
+<section class="max-w-7xl mx-auto page-container pb-16">
+<div class="bg-surface-tint rounded-2xl p-6 sm:p-8 border border-stone-200 flex flex-col md:flex-row items-center justify-between gap-6">
+<div>
+<h3 class="font-serif text-xl sm:text-2xl font-bold text-charcoal">Have a specific design or personal item in mind?</h3>
+<p class="text-xs sm:text-sm text-stone-600 mt-1">Send a photo or sketch directly to Shruti. We can stitch on almost any woven natural fabric.</p>
+</div>
+<a class="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-xl transition-all shadow-sm shrink-0" href="custom-order.html">
+<span>See How Custom Ordering Works</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</section>
+    </div>
+
+    <!-- TAB VIEW 3: CUSTOM ORDERING & PRICING -->
+    <div id="view-custom-order" class="tab-view view-hidden" data-view="custom-order">
+      <!-- Header & Guide Intro --> 
+<section class="max-w-7xl mx-auto page-container pt-8 sm:pt-12 pb-6 sm:pb-8">
+<div class="max-w-3xl">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Simple Step-by-Step</span>
+<h1 class="font-serif text-3xl sm:text-5xl font-bold text-charcoal mt-1">How Custom Ordering Works</h1>
+<p class="text-stone-600 text-xs sm:text-base mt-3 leading-relaxed">
+          Commissioning a custom hand-embroidered piece is simple and personalized. We collaborate directly with you on fabric choices, design sizing, thread colors, and placement.
+        </p>
+</div>
+</section>
+ <!-- 3 Core Ordering Steps --> 
+<section class="max-w-7xl mx-auto page-container py-4 pb-14">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+<!-- Step 1 -->
+<div class="bg-white rounded-2xl p-8 border border-stone-200/80 shadow-sm flex flex-col space-y-4 reveal-init">
+<div class="w-12 h-12 rounded-xl bg-primary/10 text-primary font-serif font-bold text-xl flex items-center justify-center">
+            01
+          </div>
+<h3 class="font-serif text-xl font-bold text-charcoal">Choose Your Garment / Fabric</h3>
+<p class="text-sm text-stone-600 leading-relaxed">
+            You have two convenient options:
+          </p>
+<ul class="text-xs sm:text-sm text-stone-700 space-y-2">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check</span>
+<span><strong>Send your clothes:</strong> Courier your favorite shirt, jeans, jacket, or kurti to our studio in Mumbai.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check</span>
+<span><strong>Use atelier blanks:</strong> Choose from our premium bio-wash cotton tees, rolled-hem handkerchiefs, or beechwood hoops.</span>
+</li>
+</ul>
+</div>
+<!-- Step 2 -->
+<div class="bg-white rounded-2xl p-8 border border-stone-200/80 shadow-sm flex flex-col space-y-4 reveal-init">
+<div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary font-serif font-bold text-xl flex items-center justify-center">
+            02
+          </div>
+<h3 class="font-serif text-xl font-bold text-charcoal">Share Design &amp; Confirm Proof</h3>
+<p class="text-sm text-stone-600 leading-relaxed">
+            Send us your inspiration on WhatsApp:
+          </p>
+<ul class="text-xs sm:text-sm text-stone-700 space-y-2">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check</span>
+<span><strong>Design ideas:</strong> Names, initials, anniversary dates, floral motifs, doodles, or pet photos.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check</span>
+<span><strong>Placement &amp; colors:</strong> Shruti shares font styles and floss color swatches for your approval before stitching.</span>
+</li>
+</ul>
+</div>
+<!-- Step 3 -->
+<div class="bg-white rounded-2xl p-8 border border-stone-200/80 shadow-sm flex flex-col space-y-4 reveal-init">
+<div class="w-12 h-12 rounded-xl bg-accent/10 text-accent font-serif font-bold text-xl flex items-center justify-center">
+            03
+          </div>
+<h3 class="font-serif text-xl font-bold text-charcoal">Hand-Stitched &amp; Tracked Delivery</h3>
+<p class="text-sm text-stone-600 leading-relaxed">
+            The artisanal creation and dispatch process:
+          </p>
+<ul class="text-xs sm:text-sm text-stone-700 space-y-2">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check</span>
+<span><strong>Work-in-progress peek:</strong> Shruti stitches your piece and shares an update as the embroidery takes shape.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check</span>
+<span><strong>Gift boxed:</strong> Packed in kraft tissue with a wax seal, dried botanical sprig, and shipped with tracking across India.</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+ <!-- INTERACTIVE WHATSAPP MESSAGE BUILDER --> 
+<section class="max-w-4xl mx-auto px-4 sm:px-8 py-8">
+<div class="bg-surface-tint rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-md reveal-init">
+<div class="text-center max-w-xl mx-auto mb-8">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Fast Inquiry</span>
+<h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">Custom Order Inquiry Builder</h2>
+<p class="text-xs sm:text-sm text-stone-600 mt-1">
+            Fill in your preferred item and motif idea below. It will automatically compose a formatted WhatsApp message for Shruti with one tap.
+          </p>
+</div>
+<form class="space-y-6" id="custom-order-builder">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Garment Type -->
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-2" for="builder-garment">Item Type</label>
+<select class="w-full rounded-xl border-stone-300 text-sm py-2.5 px-3 bg-white focus:ring-primary focus:border-primary" id="builder-garment">
+<option value="Custom T-Shirt">Custom T-Shirt (Pocket / Chest)</option>
+<option value="Formal / Linen Shirt">Shirt (Collar Tips / Cuffs)</option>
+<option value="Personalized Kurti">Kurti / Ethnic Wear (Yoke / Neckline)</option>
+<option value="Jeans / Denim Jacket">Jeans / Denim Jacket</option>
+<option value="Handkerchief">Personalized Handkerchief</option>
+<option value="Framed Hoop Art">Framed Wooden Hoop Art</option>
+<option value="Anniversary Calendar Hoop">Special Date / Calendar Hoop</option>
+<option value="Other / Unique Idea">Other / Unique Idea</option>
+</select>
+</div>
+<!-- Source -->
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-2">Garment Source</label>
+<div class="flex gap-4 pt-1 text-sm text-stone-700">
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary" name="builder-source" type="radio" value="I will courier my own clothes"/>
+<span>Send My Own Item</span>
+</label>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary" name="builder-source" type="radio" value="Provide atelier blank garment"/>
+<span>Provide Blank for Me</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Design Concept -->
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-2" for="builder-concept">Design Idea, Name, Date, or Motif</label>
+<input class="w-full rounded-xl border-stone-300 text-sm py-2.5 px-3 bg-white focus:ring-primary focus:border-primary" id="builder-concept" placeholder="e.g. 'Aesthetic floral pocket with initials S &amp; R', or 'Wedding date 14 Nov 2026'" required="" type="text"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Date Needed -->
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-2" for="builder-date">Needed By (Timeline)</label>
+<select class="w-full rounded-xl border-stone-300 text-sm py-2.5 px-3 bg-white focus:ring-primary focus:border-primary" id="builder-date">
+<option value="Flexible (Standard 3-7 days)">Flexible (Standard 3-7 days)</option>
+<option value="Urgent (Within 4-5 days)">Urgent (Within 4-5 days)</option>
+<option value="Within 2-3 weeks (Upcoming occasion)">Within 2-3 weeks (Upcoming occasion)</option>
+</select>
+</div>
+<!-- Specific Notes -->
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-2" for="builder-notes">Additional Notes / Color Preferences</label>
+<input class="w-full rounded-xl border-stone-300 text-sm py-2.5 px-3 bg-white focus:ring-primary focus:border-primary" id="builder-notes" placeholder="e.g. 'Sage green &amp; blush pink thread preferred'" type="text"/>
+</div>
+</div>
+<div class="pt-2 text-center">
+<button class="inline-flex items-center justify-center gap-2 bg-[#128C72] hover:bg-[#0e745e] active:scale-95 text-white font-semibold text-sm px-8 py-3.5 rounded-xl shadow-md transition-all cursor-pointer" type="submit">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span>Open WhatsApp with Pre-filled Details</span>
+</button>
+<p class="text-[11px] text-stone-500 mt-2">
+              Opens WhatsApp directly with Shruti. No payment is required until design details and price are confirmed.
+            </p>
+</div>
+</form>
+</div>
+</section>
+ <!-- SUPPORTED FABRICS GUIDE --> 
+<section class="max-w-7xl mx-auto page-container py-12 sm:py-14">
+<div class="text-left mb-8 reveal-init">
+<span class="text-xs uppercase font-bold tracking-widest text-secondary font-bold">Materials Guide</span>
+<h2 class="font-serif text-3xl font-bold text-charcoal mt-1">Supported Fabrics &amp; Base Garments</h2>
+<p class="text-sm text-stone-600 mt-1 max-w-2xl">
+          We adjust our needle gauge, embroidery hoop tension, and stabilizer backing to match each fabric density for clean, non-puckering stitches.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<div class="bg-white p-5 rounded-xl border border-stone-200 text-center flex flex-col items-center space-y-2 reveal-init">
+<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">apparel</span>
+</div>
+<h4 class="font-serif font-bold text-sm text-charcoal">Cotton Tees</h4>
+<p class="text-xs text-stone-500">180-240 GSM bio-wash cotton jersey</p>
+</div>
+<div class="bg-white p-5 rounded-xl border border-stone-200 text-center flex flex-col items-center space-y-2 reveal-init">
+<div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">dry_cleaning</span>
+</div>
+<h4 class="font-serif font-bold text-sm text-charcoal">Pure Linen</h4>
+<p class="text-xs text-stone-500">Oxford &amp; fine linen shirts &amp; dresses</p>
+</div>
+<div class="bg-white p-5 rounded-xl border border-stone-200 text-center flex flex-col items-center space-y-2 reveal-init">
+<div class="w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">styler</span>
+</div>
+<h4 class="font-serif font-bold text-sm text-charcoal">Kurtis &amp; Silk</h4>
+<p class="text-xs text-stone-500">Chanderi, georgette, and cotton tunics</p>
+</div>
+<div class="bg-white p-5 rounded-xl border border-stone-200 text-center flex flex-col items-center space-y-2 reveal-init">
+<div class="w-10 h-10 rounded-full bg-stone-100 text-stone-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">texture</span>
+</div>
+<h4 class="font-serif font-bold text-sm text-charcoal">Denim &amp; Twill</h4>
+<p class="text-xs text-stone-500">Jeans pockets, seams, and jackets</p>
+</div>
+<div class="bg-white p-5 rounded-xl border border-stone-200 text-center flex flex-col items-center space-y-2 reveal-init">
+<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">square</span>
+</div>
+<h4 class="font-serif font-bold text-sm text-charcoal">Handkerchiefs</h4>
+<p class="text-xs text-stone-500">Fine rolled-hem pure cambric</p>
+</div>
+<div class="bg-white p-5 rounded-xl border border-stone-200 text-center flex flex-col items-center space-y-2 reveal-init">
+<div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">radio_button_unchecked</span>
+</div>
+<h4 class="font-serif font-bold text-sm text-charcoal">Wooden Hoops</h4>
+<p class="text-xs text-stone-500">Natural unbleached calico &amp; linen</p>
+</div>
+</div>
+</section>
+ <!-- PRICING & TIMELINE MATRIX --> 
+<section class="max-w-7xl mx-auto page-container py-6 sm:py-8 pb-16 sm:pb-20">
+<div class="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-sm reveal-init">
+<h3 class="font-serif text-2xl font-bold text-charcoal mb-4">Estimated Pricing &amp; Turnaround Guide</h3>
+<p class="text-sm text-stone-600 mb-6">
+          Prices vary based on stitch density, design complexity, and size. Below are baseline starting rates:
+        </p>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm text-stone-700 border-collapse">
+<thead>
+<tr class="border-b border-stone-200 bg-stone-50/70 text-xs font-bold uppercase tracking-wider text-charcoal">
+<th class="py-3 px-4">Item Category</th>
+<th class="py-3 px-4">Starting Rate (Embroidery Only)</th>
+<th class="py-3 px-4">With Blank Garment Provided</th>
+<th class="py-3 px-4">Turnaround Time</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-100">
+<tr>
+<td class="py-3.5 px-4 font-semibold text-charcoal">Personalized Handkerchief</td>
+<td class="py-3.5 px-4">₹249</td>
+<td class="py-3.5 px-4">₹299</td>
+<td class="py-3.5 px-4 text-secondary font-medium">2-3 days</td>
+</tr>
+<tr>
+<td class="py-3.5 px-4 font-semibold text-charcoal">T-Shirt Monogram / Pocket Motif</td>
+<td class="py-3.5 px-4">₹399</td>
+<td class="py-3.5 px-4">₹699 (incl. tee)</td>
+<td class="py-3.5 px-4 text-secondary font-medium">3-5 days</td>
+</tr>
+<tr>
+<td class="py-3.5 px-4 font-semibold text-charcoal">Shirt Collar Tips / Cuff Monograms</td>
+<td class="py-3.5 px-4">₹499</td>
+<td class="py-3.5 px-4">Custom (Based on shirt)</td>
+<td class="py-3.5 px-4 text-secondary font-medium">4-6 days</td>
+</tr>
+<tr>
+<td class="py-3.5 px-4 font-semibold text-charcoal">Denim Pocket / Jacket Motif</td>
+<td class="py-3.5 px-4">₹649</td>
+<td class="py-3.5 px-4">Send your own denim</td>
+<td class="py-3.5 px-4 text-secondary font-medium">4-6 days</td>
+</tr>
+<tr>
+<td class="py-3.5 px-4 font-semibold text-charcoal">Framed Hoop Art (6-8 inch)</td>
+<td class="py-3.5 px-4">₹849 (incl. hoop frame)</td>
+<td class="py-3.5 px-4">Ready to hang frame</td>
+<td class="py-3.5 px-4 text-secondary font-medium">5-7 days</td>
+</tr>
+<tr>
+<td class="py-3.5 px-4 font-semibold text-charcoal">Anniversary Calendar Hoop</td>
+<td class="py-3.5 px-4">₹899 (incl. hoop frame)</td>
+<td class="py-3.5 px-4">Ready to hang frame</td>
+<td class="py-3.5 px-4 text-secondary font-medium">5-8 days</td>
+</tr>
+<tr>
+<td class="py-3.5 px-4 font-semibold text-charcoal">Kurti Neckline / Yoke Embroidery</td>
+<td class="py-3.5 px-4">₹899</td>
+<td class="py-3.5 px-4">Send your own kurti</td>
+<td class="py-3.5 px-4 text-secondary font-medium">5-7 days</td>
+</tr>
+<tr>
+<td class="py-3.5 px-4 font-semibold text-charcoal">Traditional Aari Work on Kurti</td>
+<td class="py-3.5 px-4">₹1,199</td>
+<td class="py-3.5 px-4">Send your own kurti</td>
+<td class="py-3.5 px-4 text-secondary font-medium">6-9 days</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+ <!-- Client Reviews Banner --> 
+<section class="max-w-7xl mx-auto page-container pb-14">
+<div class="bg-white rounded-2xl p-6 sm:p-7 border border-stone-200/90 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div>
+<h4 class="font-serif font-bold text-base sm:text-lg text-charcoal">Verified Quality &amp; Customer Trust</h4>
+<p class="text-xs text-stone-600">See what clients say about our fabric finishing, packaging, and threadwork.</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-2 bg-stone-100 hover:bg-stone-200 text-charcoal hover:text-primary text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shrink-0" href="index.html#reviews-section">
+<span>Read &amp; Post Reviews</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+    </div>
+
+    <!-- TAB VIEW 4: ABOUT STUDIO & SHRUTI -->
+    <div id="view-about" class="tab-view view-hidden" data-view="about">
+      <!-- Page Hero / Introduction --> 
+<section class="max-w-7xl mx-auto page-container pt-8 sm:pt-12 pb-8 sm:pb-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 flex flex-col space-y-5">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">The Studio &amp; Artisan</span>
+<h1 class="font-serif text-3xl sm:text-5xl font-bold text-charcoal leading-tight">
+            Slow craft, pure cotton floss, &amp; the beauty of handmade stitches.
+          </h1>
+<p class="text-stone-600 text-base sm:text-lg leading-relaxed">
+            Dreamy Needle was founded by Shruti with one simple belief: in an era of instant fast fashion and computerized factory embroidery, there is an irreplaceable beauty in taking the time to sew by hand.
+          </p>
+<p class="text-stone-600 text-sm sm:text-base leading-relaxed">
+            Every piece you see in our collection begins as a blank piece of fabric, a wooden hoop, and an idea. From tiny initial monograms on collar tips to elaborate botanical wedding date displays, each stitch is formed with human patience and care.
+          </p>
+<div class="pt-2">
+<span class="font-script text-3xl sm:text-4xl text-primary font-normal">Shruti</span>
+<p class="text-xs text-stone-500 font-semibold uppercase tracking-wider mt-0.5">Founder &amp; Embroidery Artist</p>
+</div>
+</div>
+<div class="lg:col-span-5 flex justify-center reveal-init">
+<div class="relative w-full max-w-sm">
+<div class="rounded-3xl overflow-hidden bg-white border border-stone-200 shadow-xl">
+<img alt="Shruti Maker Profile" class="w-full h-80 object-cover" src="assets/img/profile-logo.jpg"/>
+<div class="p-6 bg-white text-center border-t border-stone-100">
+<span class="font-serif font-bold text-lg text-charcoal">Dreamy Needle Atelier</span>
+<p class="text-xs text-stone-500 mt-1">Based in Mumbai, India • Delivering nationwide</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+ <!-- PHILOSOPHY: HAND EMBROIDERY VS MACHINE --> 
+<section class="w-full bg-stone-100/70 py-12 sm:py-16 page-container border-y border-stone-200/60">
+<div class="max-w-7xl mx-auto space-y-12">
+<div class="text-center max-w-2xl mx-auto reveal-init">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Our Philosophy</span>
+<h2 class="font-serif text-3xl font-bold text-charcoal mt-1">Why Hand Embroidery Matters</h2>
+<p class="text-sm text-stone-600 mt-2">Why we choose slow hand stitching over industrial machines.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Machine Embroidery Column -->
+<div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm flex flex-col space-y-4 opacity-80 reveal-init">
+<div class="flex items-center gap-2 text-stone-500 text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[18px]">precision_manufacturing</span>
+<span>Machine &amp; Factory Work</span>
+</div>
+<h3 class="font-serif text-xl font-bold text-stone-800">Flat, Rigid &amp; Mass Produced</h3>
+<ul class="text-sm text-stone-600 space-y-3 leading-relaxed">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-stone-400 text-[18px] shrink-0 mt-0.5">close</span>
+<span>Uses computerized vector scripts that feel stiff, uniform, and devoid of tactile nuance.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-stone-400 text-[18px] shrink-0 mt-0.5">close</span>
+<span>Heavy scratchy backing paper often left inside garments, irritating skin on tees.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-stone-400 text-[18px] shrink-0 mt-0.5">close</span>
+<span>Hundreds of identical copies made in seconds with synthetic polyester threads.</span>
+</li>
+</ul>
+</div>
+<!-- Hand Embroidery Column -->
+<div class="bg-white p-8 rounded-2xl border-2 border-primary/30 shadow-md flex flex-col space-y-4 relative reveal-init">
+<span class="absolute top-4 right-4 bg-primary-light text-primary text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Dreamy Needle Standard</span>
+<div class="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[18px]">back_hand</span>
+<span>100% Hand Needlework</span>
+</div>
+<h3 class="font-serif text-xl font-bold text-charcoal">Tactile, Organic &amp; One-of-a-Kind</h3>
+<ul class="text-sm text-stone-700 space-y-3 leading-relaxed">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span>Varied tension and relief: 3D French knots, satin floral fills, and delicate backstitch outlines that catch light softly.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span>Skin-friendly finish: stabilizer is dissolved or carefully trimmed, leaving only soft cotton thread against your skin.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span>Truly personal: each piece takes hours of focused craft and carries meaningful intention.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+ <!-- CRAFTSMANSHIP & MATERIALS --> 
+<section class="max-w-7xl mx-auto page-container py-12 sm:py-16">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+<div class="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200 shadow-sm flex flex-col space-y-3 reveal-init">
+<div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">water_drop</span>
+</div>
+<h3 class="font-serif text-lg font-bold text-charcoal">Colorfast Cotton Floss</h3>
+<p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+            We use high-grade 6-strand cotton embroidery floss from leading Indian and European mills. The dyes are colorfast and resist bleeding, ensuring your personalized clothes remain vibrant wash after wash.
+          </p>
+</div>
+<div class="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200 shadow-sm flex flex-col space-y-3 reveal-init">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">yard</span>
+</div>
+<h3 class="font-serif text-lg font-bold text-charcoal">Natural Woven Fabrics</h3>
+<p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+            From 220 GSM bio-washed combed cotton jersey to crisp breathable European linen and unbleached cotton calico for hoops, we pair thread tension carefully to ensure clean stitches without puckering.
+          </p>
+</div>
+<div class="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200 shadow-sm flex flex-col space-y-3 reveal-init">
+<div class="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">redeem</span>
+</div>
+<h3 class="font-serif text-lg font-bold text-charcoal">Heirloom Unboxing</h3>
+<p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+            Every custom order is packed with care: wrapped in crinkled kraft paper, sealed with real hot wax, accompanied by a sprig of dried florals, and completed with a handwritten message card.
+          </p>
+</div>
+</div>
+</section>
+ <!-- INSTAGRAM COMMUNITY --> 
+<section class="max-w-7xl mx-auto page-container pb-16">
+<div class="bg-surface-tint rounded-3xl p-6 sm:p-12 border border-stone-200 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 reveal-init">
+<div class="max-w-xl">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Behind the Scenes</span>
+<h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">Follow the Stitching Journey</h2>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+            Watch work-in-progress reels, new thread palette swatches, and client unboxing moments on our official Instagram page.
+          </p>
+</div>
+<a class="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-6 py-3.5 rounded-xl transition-all shadow-md shrink-0" href="https://www.instagram.com/dreamy_needle_19_" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+<span>Follow @dreamy_needle_19_</span>
+</a>
+</div>
+</section>
+    </div>
+
+    <!-- TAB VIEW 5: CONTACT & FAQ -->
+    <div id="view-contact" class="tab-view view-hidden" data-view="contact">
+      <!-- Header Section --> 
+<section class="max-w-7xl mx-auto page-container pt-8 sm:pt-12 pb-6 sm:pb-8">
+<div class="max-w-3xl">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Get In Touch</span>
+<h1 class="font-serif text-3xl sm:text-5xl font-bold text-charcoal mt-1">Let's Stitch Your Story</h1>
+<p class="text-stone-600 text-xs sm:text-base mt-3 leading-relaxed">
+          Whether you want to discuss an anniversary gift, a personalized shirt monogram, or have questions about caring for embroidery, Shruti is happy to assist you directly.
+        </p>
+</div>
+</section>
+ <!-- Contact Cards & Channels --> 
+<section class="max-w-7xl mx-auto page-container py-4 pb-14">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- WhatsApp -->
+<a class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:shadow-md hover:border-primary/40 transition-all flex flex-col justify-between group reveal-init" href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27d%20like%20to%20enquire%20about%20a%20custom%20embroidered%20item." rel="noopener noreferrer" target="_blank">
+<div>
+<div class="w-12 h-12 rounded-xl bg-[#128C72]/15 text-[#128C72] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">chat</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-stone-500">Fastest Response</span>
+<h3 class="font-serif text-xl font-bold text-charcoal mt-1">WhatsApp Chat</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+              Message Shruti directly to send design reference photos, pick thread shades, and receive quick pricing estimates.
+            </p>
+</div>
+<div class="pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#128C72] mt-4">
+<span>+91 75065 99552</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Instagram -->
+<a class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:shadow-md hover:border-primary/40 transition-all flex flex-col justify-between group reveal-init" href="https://www.instagram.com/dreamy_needle_19_" rel="noopener noreferrer" target="_blank">
+<div>
+<div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">photo_camera</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-stone-500">Instagram Atelier</span>
+<h3 class="font-serif text-xl font-bold text-charcoal mt-1">DM on Instagram</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+              Explore our reels, client order stories, behind-the-scenes stitch timelapses, and send a direct message.
+            </p>
+</div>
+<div class="pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-primary mt-4">
+<span>@dreamy_needle_19_</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Email -->
+<a class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:shadow-md hover:border-primary/40 transition-all flex flex-col justify-between group reveal-init" href="mailto:dreamy.needle.19@gmail.com?subject=Custom%20Embroidery%20Enquiry&amp;body=Hi%20Shruti%2C%0A%0AI%20am%20interested%20in%20a%20custom%20piece.%20Here%20are%20my%20details%3A%0A-%20Item%3A%20%0A-%20Design%20Idea%3A%20%0A-%20Needed%20By%3A%20%0A">
+<div>
+<div class="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">mail</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-stone-500">Email Studio</span>
+<h3 class="font-serif text-xl font-bold text-charcoal mt-1">Email Inquiry</h3>
+<p class="text-sm text-stone-600 mt-2 leading-relaxed">
+              Ideal for detailed bulk wedding favors, corporate gifting inquiries, or sending high-resolution artwork files.
+            </p>
+</div>
+<div class="pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-accent mt-4">
+<span class="truncate">dreamy.needle.19@gmail.com</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+</div>
+</section>
+ <!-- FREQUENTLY ASKED QUESTIONS --> 
+<section class="max-w-4xl mx-auto px-4 sm:px-8 py-8 pb-16">
+<div class="text-center max-w-xl mx-auto mb-10 reveal-init">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Need Assistance?</span>
+<h2 class="font-serif text-3xl font-bold text-charcoal mt-1">Frequently Asked Questions</h2>
+<p class="text-sm text-stone-600 mt-2">Answers to common questions about custom orders, care, and delivery.</p>
+</div>
+<div class="space-y-4">
+<!-- FAQ 1 -->
+<div class="bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden reveal-init">
+<button aria-controls="faq-panel-1" aria-expanded="false" class="faq-trigger w-full text-left p-6 font-serif text-lg font-bold text-charcoal flex items-center justify-between cursor-pointer focus:outline-none" type="button">
+<span>Can I send my own clothing for you to embroider?</span>
+<span class="material-symbols-outlined text-primary text-[22px] faq-icon">expand_more</span>
+</button>
+<div aria-hidden="true" class="faq-content" id="faq-panel-1">
+<div class="faq-content-inner px-6 pb-6 pt-1 text-sm text-stone-600 leading-relaxed border-t border-stone-100">
+              Yes, absolutely! You can ship your favorite shirts, jeans, jackets, or kurtis to our studio in Mumbai. Alternatively, if you don't want to deal with shipping your own garment, you can select from our collection of high-quality blank tees and rolled-hem handkerchiefs.
+            </div>
+</div>
+</div>
+<!-- FAQ 2 -->
+<div class="bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden reveal-init">
+<button aria-controls="faq-panel-2" aria-expanded="false" class="faq-trigger w-full text-left p-6 font-serif text-lg font-bold text-charcoal flex items-center justify-between cursor-pointer focus:outline-none" type="button">
+<span>How long does a custom order take to stitch and arrive?</span>
+<span class="material-symbols-outlined text-primary text-[22px] faq-icon">expand_more</span>
+</button>
+<div aria-hidden="true" class="faq-content" id="faq-panel-2">
+<div class="faq-content-inner px-6 pb-6 pt-1 text-sm text-stone-600 leading-relaxed border-t border-stone-100">
+              Small monograms and handkerchiefs take 2-4 stitching days. T-shirts and shirts take 3-5 days. Detailed hoop art, date frames, and kurti yokes require 5-8 days. Courier transit takes an additional 3-5 days across India. If you need urgent delivery for a birthday, anniversary, or wedding, please mention your date when inquiring.
+            </div>
+</div>
+</div>
+<!-- FAQ 3 -->
+<div class="bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden reveal-init">
+<button aria-controls="faq-panel-3" aria-expanded="false" class="faq-trigger w-full text-left p-6 font-serif text-lg font-bold text-charcoal flex items-center justify-between cursor-pointer focus:outline-none" type="button">
+<span>How should I wash and care for hand-embroidered clothing?</span>
+<span class="material-symbols-outlined text-primary text-[22px] faq-icon">expand_more</span>
+</button>
+<div aria-hidden="true" class="faq-content" id="faq-panel-3">
+<div class="faq-content-inner px-6 pb-6 pt-1 text-sm text-stone-600 leading-relaxed border-t border-stone-100">
+              We recommend gentle hand-washing in cool water with mild liquid detergent. If machine washing, turn the garment inside out and place it inside a mesh laundry bag on a gentle cycle. Always iron on the reverse side of the embroidery or place a thin cotton pressing cloth over the stitches to maintain their 3D texture.
+            </div>
+</div>
+</div>
+<!-- FAQ 4 -->
+<div class="bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden reveal-init">
+<button aria-controls="faq-panel-4" aria-expanded="false" class="faq-trigger w-full text-left p-6 font-serif text-lg font-bold text-charcoal flex items-center justify-between cursor-pointer focus:outline-none" type="button">
+<span>Can you embroider from a photograph, sketch, or handwritten note?</span>
+<span class="material-symbols-outlined text-primary text-[22px] faq-icon">expand_more</span>
+</button>
+<div aria-hidden="true" class="faq-content" id="faq-panel-4">
+<div class="faq-content-inner px-6 pb-6 pt-1 text-sm text-stone-600 leading-relaxed border-t border-stone-100">
+              Yes! We often stitch handwritten notes (e.g. from grandparents or partners), personal line sketches, architectural outlines, and pet portraits. Simply share a clear photo on WhatsApp, and Shruti will guide you on how it will translate into thread.
+            </div>
+</div>
+</div>
+<!-- FAQ 5 -->
+<div class="bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden reveal-init">
+<button aria-controls="faq-panel-5" aria-expanded="false" class="faq-trigger w-full text-left p-6 font-serif text-lg font-bold text-charcoal flex items-center justify-between cursor-pointer focus:outline-none" type="button">
+<span>Do you deliver across India?</span>
+<span class="material-symbols-outlined text-primary text-[22px] faq-icon">expand_more</span>
+</button>
+<div aria-hidden="true" class="faq-content" id="faq-panel-5">
+<div class="faq-content-inner px-6 pb-6 pt-1 text-sm text-stone-600 leading-relaxed border-t border-stone-100">
+              Yes, we provide tracked shipping across all major cities and towns in India via reliable courier partners. Your order is carefully packaged in gift-ready boxes with protective cushioning to ensure hoop frames and apparel arrive in perfect condition.
+            </div>
+</div>
+</div>
+<!-- FAQ 6 -->
+<div class="bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden reveal-init">
+<button aria-controls="faq-panel-6" aria-expanded="false" class="faq-trigger w-full text-left p-6 font-serif text-lg font-bold text-charcoal flex items-center justify-between cursor-pointer focus:outline-none" type="button">
+<span>Can I approve the design and colors before you begin stitching?</span>
+<span class="material-symbols-outlined text-primary text-[22px] faq-icon">expand_more</span>
+</button>
+<div aria-hidden="true" class="faq-content" id="faq-panel-6">
+<div class="faq-content-inner px-6 pb-6 pt-1 text-sm text-stone-600 leading-relaxed border-t border-stone-100">
+              Always. Before a single needle punctures your fabric, Shruti confirms font lettering, placement positioning, and thread color swatches with you on WhatsApp. We only begin sewing once you are completely delighted with the plan.
+            </div>
+</div>
+</div>
+</div>
+</section>
+ <!-- Care Instructions Card --> 
+<section class="max-w-4xl mx-auto page-container pb-16">
+<div class="bg-surface-tint rounded-2xl p-6 sm:p-8 border border-stone-200 flex flex-col sm:flex-row items-center gap-6">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[30px]">local_laundry_service</span>
+</div>
+<div class="flex-1 text-left">
+<h4 class="font-serif font-bold text-lg text-charcoal">Handmade Garment Care Tip</h4>
+<p class="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">
+            All Dreamy Needle creations use premium colorfast cotton stranded floss. For lasting beauty, wash in cold water with mild detergent and iron on the reverse side.
+          </p>
+</div>
+</div>
+</section>
+    </div>
+
+    <div class="modal-backdrop fixed inset-0 bg-charcoal/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" id="review-modal">
+<div class="modal-panel bg-white w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl border border-stone-200 relative max-h-[90vh] overflow-y-auto">
+<button aria-label="Close review modal" class="close-review-modal-btn absolute top-5 right-5 text-stone-400 hover:text-charcoal p-1 rounded-lg" type="button">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+<div class="mb-6">
+<span class="text-xs uppercase font-bold tracking-widest text-primary">Your Feedback</span>
+<h3 class="font-serif text-2xl font-bold text-charcoal mt-0.5">Share Your Experience</h3>
+<p class="text-xs text-stone-500 mt-1">Tell us how your custom embroidery order turned out!</p>
+</div>
+<form class="space-y-4" id="review-submission-form">
+<!-- Star Rating Picker (Empty by default, interactive selection) -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider">Your Rating <span class="text-primary">*</span></label>
+<span class="text-xs font-semibold text-stone-400" id="star-rating-label">Click to rate</span>
+</div>
+<div class="flex items-center gap-1.5" id="star-picker">
+<button aria-label="1 star" class="star-rating-btn cursor-pointer p-1 text-stone-300 hover:scale-110 transition-transform" data-star="1" type="button">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 0;">star</span>
+</button>
+<button aria-label="2 stars" class="star-rating-btn cursor-pointer p-1 text-stone-300 hover:scale-110 transition-transform" data-star="2" type="button">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 0;">star</span>
+</button>
+<button aria-label="3 stars" class="star-rating-btn cursor-pointer p-1 text-stone-300 hover:scale-110 transition-transform" data-star="3" type="button">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 0;">star</span>
+</button>
+<button aria-label="4 stars" class="star-rating-btn cursor-pointer p-1 text-stone-300 hover:scale-110 transition-transform" data-star="4" type="button">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 0;">star</span>
+</button>
+<button aria-label="5 stars" class="star-rating-btn cursor-pointer p-1 text-stone-300 hover:scale-110 transition-transform" data-star="5" type="button">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 0;">star</span>
+</button>
+</div>
+<p class="text-xs text-primary font-semibold mt-1 hidden" id="star-rating-error">Please select a star rating (1 to 5 stars).</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1" for="review-name">Your Name</label>
+<input class="w-full rounded-xl border-stone-300 py-2.5 px-3 text-sm focus:ring-primary focus:border-primary" id="review-name" placeholder="e.g. Shruti Sharma" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1" for="review-city">City / State</label>
+<input class="w-full rounded-xl border-stone-300 py-2.5 px-3 text-sm focus:ring-primary focus:border-primary" id="review-city" placeholder="e.g. Mumbai" required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1" for="review-item">Item Embroidered</label>
+<select class="w-full rounded-xl border-stone-300 py-2.5 px-3 text-sm bg-white focus:ring-primary focus:border-primary" id="review-item">
+<option value="Custom T-Shirt">Custom T-Shirt</option>
+<option value="Personalized Shirt">Personalized Shirt / Collar</option>
+<option value="Special Date Calendar Hoop">Special Date / Calendar Hoop</option>
+<option value="Botanical Hoop Art">Botanical Hoop Art</option>
+<option value="Custom Denim / Jeans">Custom Denim / Jeans</option>
+<option value="Personalized Handkerchief">Personalized Handkerchief</option>
+<option value="Kurti / Ethnic Embroidery">Kurti / Ethnic Embroidery</option>
+<option value="Other Keepsake">Other Keepsake</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1" for="review-text">Review Details</label>
+<textarea class="w-full rounded-xl border-stone-300 py-2 px-3 text-sm focus:ring-primary focus:border-primary" id="review-text" placeholder="How did the stitches look? Did the packaging arrive nicely?" required="" rows="3"></textarea>
+</div>
+<div class="pt-2 flex items-center justify-end gap-3">
+<button class="close-review-modal-btn px-4 py-2.5 text-xs font-semibold text-stone-600 hover:text-charcoal rounded-xl" type="button">
+              Cancel
+            </button>
+<button class="bg-primary hover:bg-primary-hover active:scale-95 text-white text-xs sm:text-sm font-semibold px-6 py-2.5 rounded-xl shadow-md transition-all cursor-pointer" type="submit">
+              Post Review
+            </button>
+</div>
+</form>
+</div>
+</div>
+  </main>
+
+<!-- Clean Footer -->
+  <footer class="w-full bg-stone-100 border-t border-stone-200 mt-10">
+    <div class="max-w-7xl mx-auto page-container py-10 sm:py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="flex flex-col space-y-3">
+        <div class="flex items-center gap-2.5">
+          <img alt="Dreamy Needle Logo" class="w-8 h-8 rounded-full object-cover" src="assets/img/profile-logo.jpg">
+          <span class="font-serif text-xl font-bold text-charcoal">Dreamy Needle</span>
+        </div>
+        <p class="text-xs text-stone-600 leading-relaxed">
+          100% hand-stitched custom embroidery by Shruti. Crafting meaningful, bespoke wearable art and framed keepsakes.
+        </p>
+        <span class="font-script text-2xl text-primary font-normal">Made with love by Shruti</span>
+      </div>
+
+      <div>
+        <h4 class="text-xs uppercase font-bold tracking-wider text-charcoal mb-3">Studio Pages</h4>
+        <ul class="space-y-2 text-xs sm:text-sm text-stone-600">
+          <li><a class="hover:text-primary transition-colors" href="index.html">Home</a></li>
+          <li><a class="hover:text-primary transition-colors" href="creations.html">Creations &amp; Catalog (11 Styles)</a></li>
+          <li><a class="hover:text-primary transition-colors" href="custom-order.html">How to Order &amp; Pricing</a></li>
+          <li><a class="hover:text-primary transition-colors" href="about.html">About Shruti &amp; Philosophy</a></li>
+          <li><a class="hover:text-primary transition-colors" href="contact.html">Contact &amp; FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs uppercase font-bold tracking-wider text-charcoal mb-3">Popular Items</h4>
+        <ul class="space-y-2 text-xs sm:text-sm text-stone-600">
+          <li><a class="hover:text-primary transition-colors" href="creations.html">Custom T-Shirt Monograms</a></li>
+          <li><a class="hover:text-primary transition-colors" href="creations.html">Personalized Handkerchiefs</a></li>
+          <li><a class="hover:text-primary transition-colors" href="creations.html">Wedding &amp; Calendar Hoops</a></li>
+          <li><a class="hover:text-primary transition-colors" href="creations.html">Custom Denim &amp; Jeans</a></li>
+          <li><a class="hover:text-primary transition-colors" href="creations.html">Aari &amp; Kurti Detailing</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs uppercase font-bold tracking-wider text-charcoal mb-3">Connect with Shruti</h4>
+        <p class="text-xs text-stone-600 mb-3">Direct message on WhatsApp or Instagram for quick inquiries and price quotes.</p>
+        <div class="space-y-2 text-xs font-semibold text-stone-700">
+          <p class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px] text-primary">chat</span>
+            <a class="hover:text-primary" href="https://wa.me/917506599552" target="_blank" rel="noopener noreferrer">+91 75065 99552</a>
+          </p>
+          <p class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px] text-primary">photo_camera</span>
+            <a class="hover:text-primary" href="https://www.instagram.com/dreamy_needle_19_" target="_blank" rel="noopener noreferrer">@dreamy_needle_19_</a>
+          </p>
+          <p class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px] text-primary">mail</span>
+            <a class="hover:text-primary" href="mailto:dreamy.needle.19@gmail.com">dreamy.needle.19@gmail.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-stone-200 py-4 text-center text-xs text-stone-500">
+      &copy; 2026 Dreamy Needle by Shruti. All rights reserved. Handcrafted with love in Mumbai, India.
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp CTA -->
+  <a aria-label="Chat on WhatsApp" class="wa-fab"
+    href="https://wa.me/917506599552?text=Hi%20Shruti%2C%20I%27d%20like%20to%20order%20a%20custom%20embroidered%20item."
+    rel="noopener noreferrer" target="_blank">
+    <span class="wa-fab-label">Chat with Shruti</span>
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+      <path fill="#fff"
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+  </a>
+
+  <script src="script.js?v=2.1"></script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "dreamy-needle",
+  "version": "1.0.0",
+  "description": "Dreamy Needle — Bespoke Handcrafted Embroidery by Shruti Atelier",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js 8000"
+  },
+  "keywords": [
+    "embroidery",
+    "handcrafted",
+    "atelier",
+    "custom-embroidery"
+  ],
+  "author": "Shruti",
+  "license": "ISC"
+}

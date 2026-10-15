@@ -1,2 +1,5 @@
 .vercel
 node_modules
+scratch/
+.DS_Store
+*.log

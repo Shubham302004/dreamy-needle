@@ -1,441 +1,1035 @@
+/**
+ * Dreamy Needle — Shared Client-Side Script
+ * Instantaneous zero-flicker tab navigation, luxury custom dropdowns,
+ * mobile UX, continuous scroll stitch, and dynamic reviews.
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const docEl = document.documentElement;
 
-  /* 1. Scroll-reveal engine with sibling stagger */
-  const revealElements = document.querySelectorAll('.reveal-init');
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const siblings = el.parentElement ? el.parentElement.children : [];
-        const idx = Math.min(Array.prototype.indexOf.call(siblings, el), 5);
-        const delay = reduceMotion ? 0 : idx * 90;
-        el.style.setProperty('--d', delay + 'ms');
-        el.classList.add('reveal-visible');
-        obs.unobserve(el);
-        /* hand transitions back to the element's own styles once entrance completes */
-        window.setTimeout(() => {
-          el.classList.remove('reveal-init');
-          el.style.removeProperty('--d');
-        }, delay + 1500);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealElements.forEach(el => observer.observe(el));
-  } else {
-    revealElements.forEach(el => { el.classList.add('reveal-visible'); el.classList.remove('reveal-init'); });
-  }
+  // Clear any legacy test reviews from prior local testing sessions
+  try {
+    const rawLocal = localStorage.getItem('dreamy_needle_reviews');
+    if (rawLocal && (rawLocal.includes('Shubham') || rawLocal.includes('very nice') || rawLocal.includes('Aarav'))) {
+      localStorage.removeItem('dreamy_needle_reviews');
+    }
+  } catch (e) {}
 
-  /* 2. Interactive FAQ accordion (aria-expanded + aria-hidden kept in sync) */
-  document.querySelectorAll('.faq-trigger').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const content = btn.nextElementSibling;
-      const icon = btn.querySelector('.faq-icon');
-      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!isExpanded));
-      if (content) {
-        const open = content.classList.toggle('is-open');
-        content.setAttribute('aria-hidden', String(!open));
-      }
-      if (icon) icon.classList.toggle('is-open');
-    });
-  });
+  /* -------------------------------------------------------------
+     1. Scroll Reveal with IntersectionObserver
+     ------------------------------------------------------------- */
+  function initRevealObserver() {
+    const revealElements = document.querySelectorAll('.tab-view.active .reveal-init:not(.reveal-visible)');
+    if (revealElements.length === 0) return;
 
-  /* 3. Category filter pills */
-  const filterPills = document.querySelectorAll('.filter-pill');
-  const creationCards = document.querySelectorAll('#creations-grid .creation-card');
-  filterPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      const filter = pill.getAttribute('data-filter');
-      filterPills.forEach(p => {
-        p.setAttribute('aria-pressed', 'false');
-        p.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
-        p.classList.add('bg-surface-container', 'text-on-surface-variant');
-      });
-      pill.setAttribute('aria-pressed', 'true');
-      pill.classList.remove('bg-surface-container', 'text-on-surface-variant');
-      pill.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
-      creationCards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
-          /* cancel any pending hide so rapid filter switches never vanish this card */
-          if (card._hideTimeout) { clearTimeout(card._hideTimeout); card._hideTimeout = null; }
-          if (card._showTimeout) { clearTimeout(card._showTimeout); card._showTimeout = null; }
-          card.style.display = '';
-          card._showTimeout = window.setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0) scale(1)';
-            card._showTimeout = null;
-          }, 20);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const siblings = el.parentElement ? el.parentElement.children : [];
+          const idx = Math.min(Array.prototype.indexOf.call(siblings, el), 6);
+          const delay = reduceMotion ? 0 : idx * 45;
+          el.style.setProperty('--d', delay + 'ms');
+          el.classList.add('reveal-visible');
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('reveal-visible');
         } else {
-          if (card._showTimeout) { clearTimeout(card._showTimeout); card._showTimeout = null; }
-          card.style.opacity = '0';
-          card.style.transform = 'scale(0.96)';
-          if (card._hideTimeout) clearTimeout(card._hideTimeout);
-          card._hideTimeout = window.setTimeout(() => {
-            card.style.display = 'none';
-            card._hideTimeout = null;
-          }, 320);
+          observer.observe(el);
         }
       });
-    });
-  });
-
-  /* 3b. Gallery nav anchor: if a filter hides the #gallery card, restore it first */
-  document.querySelectorAll('a[href="#gallery"]').forEach(a => {
-    a.addEventListener('click', () => {
-      const g = document.getElementById('gallery');
-      if (g && g.offsetParent === null) {
-        const allPill = document.querySelector('.filter-pill[data-filter="all"]');
-        if (allPill) allPill.click();
-      }
-    });
-  });
-
-  /* 4. Hero mouse tilt (fine pointers only) — targets the inner card so the
-     outer .hero-hoop-float keyframe animation keeps owning its own transform */
-  const heroCard = document.getElementById('hero-hoop-tilt');
-  const heroWrap = document.getElementById('hero-interactive-wrap');
-  const heroBadge = heroWrap ? heroWrap.querySelector('div.absolute.-bottom-4') : null;
-  if (heroWrap && heroCard && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-    heroWrap.addEventListener('mousemove', (e) => {
-      const rect = heroWrap.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      heroCard.style.transform = `perspective(800px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateY(-4px)`;
-    });
-    heroWrap.addEventListener('mouseleave', () => { heroCard.style.transform = ''; });
+    } else {
+      revealElements.forEach(el => el.classList.add('reveal-visible'));
+    }
   }
 
-  /* 5. Mobile navigation menu */
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (menuToggle && mobileMenu) {
-    const setMenu = (open) => {
-      mobileMenu.classList.toggle('open', open);
-      menuToggle.setAttribute('aria-expanded', String(open));
-      menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-      const icon = menuToggle.querySelector('.material-symbols-outlined');
-      if (icon) icon.textContent = open ? 'close' : 'menu';
+  /* -------------------------------------------------------------
+     2. Mobile Menu Drawer Toggle
+     ------------------------------------------------------------- */
+  function initMobileMenu() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuToggle && mobileMenu) {
+      const setMenu = (open) => {
+        mobileMenu.classList.toggle('open', open);
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+        const icon = menuToggle.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = open ? 'close' : 'menu';
+      };
+      menuToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+      mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    }
+  }
+
+  /* -------------------------------------------------------------
+     3. Artisanal Custom Select Dropdown UI
+     Replaces native OS blue dropdowns with luxury boutique UI
+     ------------------------------------------------------------- */
+  function initCustomSelects() {
+    const selects = document.querySelectorAll('select:not([data-custom-enhanced])');
+    selects.forEach(selectEl => {
+      selectEl.setAttribute('data-custom-enhanced', 'true');
+      selectEl.classList.add('custom-select-native-hidden');
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'custom-select-wrap';
+
+      const currentOption = selectEl.options[selectEl.selectedIndex] || selectEl.options[0];
+      const initialText = currentOption ? currentOption.textContent : 'Select an option';
+
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'custom-select-trigger';
+      trigger.setAttribute('aria-haspopup', 'listbox');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.innerHTML = `
+        <span class="custom-select-label truncate">${initialText}</span>
+        <span class="material-symbols-outlined custom-select-arrow">expand_more</span>
+      `;
+
+      const menu = document.createElement('div');
+      menu.className = 'custom-select-menu';
+      menu.setAttribute('role', 'listbox');
+
+      Array.from(selectEl.options).forEach((opt, idx) => {
+        const optEl = document.createElement('div');
+        optEl.className = 'custom-select-option' + (idx === selectEl.selectedIndex ? ' is-selected' : '');
+        optEl.setAttribute('role', 'option');
+        optEl.setAttribute('data-value', opt.value);
+        optEl.innerHTML = `
+          <span class="truncate">${opt.textContent}</span>
+          <span class="material-symbols-outlined custom-option-check">check</span>
+        `;
+
+        optEl.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectEl.selectedIndex = idx;
+          selectEl.value = opt.value;
+          selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+
+          const labelSpan = trigger.querySelector('.custom-select-label');
+          if (labelSpan) labelSpan.textContent = opt.textContent;
+
+          menu.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('is-selected'));
+          optEl.classList.add('is-selected');
+
+          closeMenu();
+          trigger.focus();
+        });
+
+        menu.appendChild(optEl);
+      });
+
+      const openMenu = () => {
+        document.querySelectorAll('.custom-select-wrap.is-open').forEach(w => {
+          if (w !== wrapper) {
+            w.classList.remove('is-open');
+            w.querySelector('.custom-select-trigger')?.setAttribute('aria-expanded', 'false');
+          }
+        });
+        wrapper.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      };
+
+      const closeMenu = () => {
+        wrapper.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      };
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (wrapper.classList.contains('is-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          openMenu();
+          const firstOpt = menu.querySelector('.custom-select-option');
+          if (firstOpt) firstOpt.focus();
+        } else if (e.key === 'Escape') {
+          closeMenu();
+        }
+      });
+
+      if (selectEl.parentNode) {
+        selectEl.parentNode.insertBefore(wrapper, selectEl);
+        wrapper.appendChild(trigger);
+        wrapper.appendChild(menu);
+        wrapper.appendChild(selectEl);
+      }
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.custom-select-wrap')) {
+      document.querySelectorAll('.custom-select-wrap.is-open').forEach(w => {
+        w.classList.remove('is-open');
+        w.querySelector('.custom-select-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  /* -------------------------------------------------------------
+     4. Category Filter Pills (Creations View) — Smooth Crossfade
+     ------------------------------------------------------------- */
+  function initCategoryFilterPills() {
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const creationCards = document.querySelectorAll('.creation-card');
+    if (filterPills.length === 0 || creationCards.length === 0) return;
+
+    filterPills.forEach(pill => {
+      if (pill.getAttribute('data-pill-bound')) return;
+      pill.setAttribute('data-pill-bound', 'true');
+
+      pill.addEventListener('click', () => {
+        const filter = pill.getAttribute('data-filter');
+        filterPills.forEach(p => {
+          p.setAttribute('aria-pressed', 'false');
+          p.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+          p.classList.add('bg-stone-100', 'text-stone-700');
+        });
+        pill.setAttribute('aria-pressed', 'true');
+        pill.classList.remove('bg-stone-100', 'text-stone-700');
+        pill.classList.add('bg-primary', 'text-white', 'shadow-sm');
+
+        creationCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          const isMatch = (filter === 'all' || category === filter || (category && category.includes(filter)));
+          if (isMatch) {
+            card.classList.remove('filter-hidden');
+            card.style.display = '';
+            requestAnimationFrame(() => {
+              card.classList.remove('filtering-out');
+            });
+          } else {
+            card.classList.add('filtering-out');
+            setTimeout(() => {
+              if (card.classList.contains('filtering-out')) {
+                card.classList.add('filter-hidden');
+              }
+            }, 180);
+          }
+        });
+
+        setTimeout(() => {
+          if (typeof window._rebuildStitch === 'function') {
+            window._rebuildStitch(true);
+          }
+        }, 200);
+      });
+    });
+  }
+
+  /* -------------------------------------------------------------
+     5. Accessible FAQ Accordions (Contact View)
+     ------------------------------------------------------------- */
+  function initFaqAccordions() {
+    document.querySelectorAll('.faq-trigger').forEach(btn => {
+      if (btn.getAttribute('data-faq-bound')) return;
+      btn.setAttribute('data-faq-bound', 'true');
+
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector('.faq-icon');
+        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!isExpanded));
+        if (content) {
+          const open = content.classList.toggle('is-open');
+          content.setAttribute('aria-hidden', String(!open));
+        }
+        if (icon) icon.classList.toggle('is-open');
+      });
+    });
+  }
+
+  /* -------------------------------------------------------------
+     6. Interactive WhatsApp Order Builder (Custom Order View)
+     ------------------------------------------------------------- */
+  function initWhatsAppOrderBuilder() {
+    const waForm = document.getElementById('custom-order-builder');
+    if (!waForm || waForm.getAttribute('data-bound')) return;
+    waForm.setAttribute('data-bound', 'true');
+
+    waForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const garment = document.getElementById('builder-garment')?.value || 'Custom Item';
+      const source = document.querySelector('input[name="builder-source"]:checked')?.value || 'Own Garment';
+      const concept = document.getElementById('builder-concept')?.value || 'Personalized Design';
+      const dateNeed = document.getElementById('builder-date')?.value || 'Flexible';
+      const notes = document.getElementById('builder-notes')?.value || '';
+
+      let message = `Hi Shruti! I'd like to commission a custom embroidery piece:%0A%0A` +
+        `• *Item Type*: ${encodeURIComponent(garment)}%0A` +
+        `• *Garment Source*: ${encodeURIComponent(source)}%0A` +
+        `• *Design Idea / Name / Motif*: ${encodeURIComponent(concept)}%0A` +
+        `• *Needed By*: ${encodeURIComponent(dateNeed)}%0A`;
+
+      if (notes.trim()) {
+        message += `• *Notes*: ${encodeURIComponent(notes.trim())}%0A`;
+      }
+      message += `%0ACould you please share a quote and timeline? Thank you!`;
+
+      const waUrl = `https://wa.me/917506599552?text=${message}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  /* -------------------------------------------------------------
+     7. Dynamic Reviews & Star Rating Modal (reviews.json storage)
+     ------------------------------------------------------------- */
+  function initReviewSystem() {
+    const reviewGrid = document.getElementById('reviews-grid');
+    const reviewModal = document.getElementById('review-modal');
+    const openReviewBtns = document.querySelectorAll('.open-review-modal-btn');
+    const closeReviewBtns = document.querySelectorAll('.close-review-modal-btn');
+    const reviewForm = document.getElementById('review-submission-form');
+    const starButtons = document.querySelectorAll('.star-rating-btn');
+    const starPicker = document.getElementById('star-picker');
+    const starLabel = document.getElementById('star-rating-label');
+    const starError = document.getElementById('star-rating-error');
+
+    const ratingDescriptions = {
+      1: '1 Star - Needs Improvement',
+      2: '2 Stars - Fair',
+      3: '3 Stars - Good',
+      4: '4 Stars - Very Happy!',
+      5: '5 Stars - Absolutely Loved It!'
     };
-    menuToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  }
 
-  /* 6. Scroll-driven FX: thread progress, stitch connector, hero parallax, active nav */
-  const threadFill = document.getElementById('thread-fill');
-  const threadNeedle = document.querySelector('.thread-needle');
-  const stepThread = document.getElementById('step-thread');
-  const stepsGrid = document.getElementById('steps-grid');
-  const heroSection = document.getElementById('hero-section');
-  const heroBlobs = heroSection ? heroSection.querySelectorAll('.blur-3xl') : [];
-  const heroSvg = heroSection ? heroSection.querySelector('svg') : null;
-  const siteNav = document.getElementById('site-nav');
-  const navActiveClasses = siteNav ? siteNav.getAttribute('data-active-classes').split(/\s+/) : [];
-  const navBaseClasses = ['text-on-surface-variant', 'hover:text-on-surface'];
-  const navLinks = Array.prototype.slice.call(document.querySelectorAll('#site-nav .nav-link, #mobile-menu .mobile-link'));
-  /* remember each link's own base/active class set so toggling never injects
-     classes the link never had (e.g. desktop hover class onto mobile links) */
-  navLinks.forEach(a => {
-    a._base = navBaseClasses.filter(c => a.classList.contains(c));
-    a._active = a.classList.contains('nav-link') ? navActiveClasses : ['text-primary', 'font-bold'];
-  });
-  const sectionIds = navLinks.map(a => (a.getAttribute('href') || '').slice(1)).filter((v, i, arr) => v && arr.indexOf(v) === i);
-  let lastActive = null;
-  let ticking = false;
-  let heroWrapShift = 0;
+    let selectedRating = 0;
 
-  const requestTick = () => {
-    if (!ticking) { window.requestAnimationFrame(updateScrollFX); ticking = true; }
-  };
-
-  function updateScrollFX() {
-    ticking = false;
-    const y = window.pageYOffset || docEl.scrollTop;
-    const vh = window.innerHeight;
-    const max = docEl.scrollHeight - vh;
-    const p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
-
-    /* A. thread progress bar + riding needle (clamped so it never clips the viewport edge) */
-    if (threadFill) threadFill.style.transform = 'scaleX(' + p + ')';
-    if (threadNeedle) {
-      const needleX = Math.max(0, Math.min(window.innerWidth - 18, p * (window.innerWidth - 18)));
-      threadNeedle.style.transform = 'translateX(' + needleX + 'px)';
-    }
-
-    /* B. self-stitching brass thread through the how-to-order steps */
-    if (stepThread && stepsGrid) {
-      const r = stepsGrid.getBoundingClientRect();
-      const prog = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / Math.max(1, r.height * 0.7 + 80)));
-      stepThread.style.setProperty('--p', prog.toFixed(3));
-    }
-
-    /* D. hero parallax layers (blobs, stitch curve, showcase card)
-       The card carries an "Original" badge that hangs 16px below it, and the
-       hero clips (overflow:hidden) right at its padding edge — so the card's
-       shift is clamped to the room actually left below it, otherwise the badge
-       gets sliced off by the next section on mobile. */
-    if (!reduceMotion && heroSection && y < heroSection.offsetTop + heroSection.offsetHeight) {
-      if (heroBlobs[0]) heroBlobs[0].style.transform = 'translate3d(0,' + (y * 0.16).toFixed(1) + 'px,0)';
-      if (heroBlobs[1]) heroBlobs[1].style.transform = 'translate3d(0,' + (y * 0.1).toFixed(1) + 'px,0)';
-      if (heroSvg) heroSvg.style.transform = 'translate3d(0,' + (y * 0.07).toFixed(1) + 'px,0)';
-      if (heroWrap) {
-        const heroRect = heroSection.getBoundingClientRect();
-        const wrapRect = heroWrap.getBoundingClientRect();
-        /* the "Original" badge hangs 16px below the wrapper's own box, so the
-           wrapper rect alone under-reports how far the card may travel */
-        const badgeRect = heroBadge ? heroBadge.getBoundingClientRect() : null;
-        const contentBottom = badgeRect ? Math.max(wrapRect.bottom, badgeRect.bottom) : wrapRect.bottom;
-        /* static clearance = live gap + the shift already applied, minus room
-           for the hero-hoop-float keyframes (±6px) while they swing down */
-        const room = heroRect.bottom - contentBottom + heroWrapShift - 10;
-        const shift = Math.max(0, Math.min(y * 0.05, room));
-        heroWrapShift = shift;
-        heroWrap.style.transform = 'translate3d(0,' + shift.toFixed(1) + 'px,0)';
-      }
-    }
-
-    /* G. active nav highlighting driven by scroll position */
-    let activeId = '';
-    let bestTop = -Infinity;
-    for (let i = 0; i < sectionIds.length; i++) {
-      const el = document.getElementById(sectionIds[i]);
-      if (!el || el.offsetParent === null) continue;
-      const r = el.getBoundingClientRect();
-      if (r.height === 0 || r.top > 160) continue;
-      if (el.offsetTop > bestTop) {
-        bestTop = el.offsetTop;
-        activeId = sectionIds[i];
-      }
-    }
-    if (activeId !== lastActive) {
-      lastActive = activeId;
-      navLinks.forEach(a => {
-        const isActive = a.getAttribute('href') === '#' + activeId;
-        if (isActive) {
-          a._base.forEach(c => a.classList.remove(c));
-          a._active.forEach(c => a.classList.add(c));
-          a.setAttribute('aria-current', 'true');
+    function updateStarDisplay(rating) {
+      starButtons.forEach(btn => {
+        const val = parseInt(btn.getAttribute('data-star') || '0', 10);
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (val <= rating) {
+          btn.classList.remove('text-stone-300');
+          btn.classList.add('text-amber-500');
+          if (icon) icon.style.fontVariationSettings = "'FILL' 1";
         } else {
-          a._active.forEach(c => a.classList.remove(c));
-          a._base.forEach(c => a.classList.add(c));
-          a.removeAttribute('aria-current');
+          btn.classList.remove('text-amber-500');
+          btn.classList.add('text-stone-300');
+          if (icon) icon.style.fontVariationSettings = "'FILL' 0";
+        }
+      });
+
+      if (starLabel) {
+        if (rating > 0) {
+          starLabel.textContent = ratingDescriptions[rating] || `${rating} Stars`;
+          starLabel.className = 'text-xs font-bold text-amber-600';
+        } else {
+          starLabel.textContent = 'Click to rate';
+          starLabel.className = 'text-xs font-semibold text-stone-400';
+        }
+      }
+    }
+
+    if (starPicker && !starPicker.getAttribute('data-bound')) {
+      starPicker.setAttribute('data-bound', 'true');
+      starButtons.forEach(btn => {
+        const val = parseInt(btn.getAttribute('data-star') || '0', 10);
+
+        btn.addEventListener('mouseenter', () => updateStarDisplay(val));
+        btn.addEventListener('click', () => {
+          selectedRating = val;
+          updateStarDisplay(selectedRating);
+          if (starError) starError.classList.add('hidden');
+        });
+      });
+
+      starPicker.addEventListener('mouseleave', () => {
+        updateStarDisplay(selectedRating);
+      });
+    }
+
+    if (reviewModal && !reviewModal.getAttribute('data-bound')) {
+      reviewModal.setAttribute('data-bound', 'true');
+
+      openReviewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedRating = 0;
+          updateStarDisplay(0);
+          if (starError) starError.classList.add('hidden');
+          reviewModal.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      closeReviewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          reviewModal.classList.remove('is-open');
+          document.body.style.overflow = '';
+        });
+      });
+
+      reviewModal.addEventListener('click', (e) => {
+        if (e.target === reviewModal) {
+          reviewModal.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && reviewModal.classList.contains('is-open')) {
+          reviewModal.classList.remove('is-open');
+          document.body.style.overflow = '';
         }
       });
     }
+
+    if (reviewForm && !reviewForm.getAttribute('data-bound')) {
+      reviewForm.setAttribute('data-bound', 'true');
+
+      reviewForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (selectedRating === 0) {
+          if (starError) {
+            starError.classList.remove('hidden');
+            starPicker?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          return;
+        }
+
+        const name = document.getElementById('review-name')?.value.trim() || 'Verified Customer';
+        const city = document.getElementById('review-city')?.value.trim() || 'India';
+        const item = document.getElementById('review-item')?.value || 'Custom Embroidery';
+        const text = document.getElementById('review-text')?.value.trim();
+
+        if (!text) return;
+
+        const newReview = {
+          id: Date.now(),
+          name: name,
+          city: city,
+          item: item,
+          rating: selectedRating,
+          date: 'Just now',
+          text: text,
+          isUserGenerated: true
+        };
+
+        if (window.location.protocol.startsWith('http')) {
+          try {
+            await fetch('/api/reviews', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newReview)
+            });
+          } catch (err) {
+            console.warn('Server API not responding, saving to localStorage', err);
+          }
+        }
+
+        try {
+          const stored = JSON.parse(localStorage.getItem('dreamy_needle_reviews') || '[]');
+          stored.unshift(newReview);
+          localStorage.setItem('dreamy_needle_reviews', JSON.stringify(stored));
+        } catch (err) {}
+
+        selectedRating = 0;
+        updateStarDisplay(0);
+        reviewForm.reset();
+
+        const reviewItemWrap = document.getElementById('review-item')?.closest('.custom-select-wrap');
+        if (reviewItemWrap) {
+          const firstOpt = document.getElementById('review-item').options[0];
+          const labelSpan = reviewItemWrap.querySelector('.custom-select-label');
+          if (labelSpan && firstOpt) labelSpan.textContent = firstOpt.textContent;
+          reviewItemWrap.querySelectorAll('.custom-select-option').forEach((opt, idx) => {
+            opt.classList.toggle('is-selected', idx === 0);
+          });
+        }
+
+        reviewModal.classList.remove('is-open');
+        document.body.style.overflow = '';
+
+        await loadReviews(newReview.id);
+
+        const revSection = document.getElementById('reviews-section');
+        if (revSection) {
+          setTimeout(() => {
+            revSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 120);
+        }
+
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#201a16] text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-3 border border-stone-700/80';
+        toast.innerHTML = `
+          <span class="material-symbols-outlined text-[#34d399] text-[20px]">check_circle</span>
+          <span>Thank you, <strong>${name}</strong>! Your review has been saved in reviews.json.</span>
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4500);
+      });
+    }
+
+    async function loadReviews(highlightId = null) {
+      let reviews = [];
+
+      if (window.location.protocol.startsWith('http')) {
+        try {
+          const res = await fetch('/api/reviews', { cache: 'no-cache' });
+          if (res.ok) {
+            reviews = await res.json();
+          } else {
+            const fileRes = await fetch('reviews.json', { cache: 'no-cache' });
+            if (fileRes.ok) reviews = await fileRes.json();
+          }
+          // Synchronize local cache with server data so deleted reviews do not linger
+          try {
+            localStorage.setItem('dreamy_needle_reviews', JSON.stringify(reviews));
+          } catch (err) {}
+        } catch (e) {
+          try {
+            reviews = JSON.parse(localStorage.getItem('dreamy_needle_reviews') || '[]');
+          } catch (err) {
+            reviews = [];
+          }
+        }
+      } else {
+        try {
+          const raw = localStorage.getItem('dreamy_needle_reviews');
+          if (raw && !raw.includes('Shubham') && !raw.includes('very nice') && !raw.includes('Aarav')) {
+            reviews = JSON.parse(raw);
+          } else {
+            reviews = [];
+            localStorage.removeItem('dreamy_needle_reviews');
+          }
+        } catch (err) {
+          reviews = [];
+        }
+      }
+
+      updateReviewStats(reviews);
+
+      if (reviewGrid) {
+        reviewGrid.innerHTML = '';
+
+        if (!reviews || reviews.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'col-span-full py-12 px-6 text-center bg-stone-50/80 rounded-2xl border border-dashed border-stone-300';
+          empty.innerHTML = `
+            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3">
+              <span class="material-symbols-outlined text-[26px]">rate_review</span>
+            </div>
+            <h4 class="font-serif font-bold text-lg text-charcoal">No client reviews yet</h4>
+            <p class="text-xs sm:text-sm text-stone-500 max-w-sm mx-auto mt-1 mb-4">
+              Be the very first client to share your experience with Dreamy Needle!
+            </p>
+            <button type="button" class="open-review-modal-btn inline-flex items-center gap-2 bg-primary hover:bg-primary-hover active:scale-95 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[18px]">rate_review</span>
+              <span>Write the First Review</span>
+            </button>
+          `;
+          reviewGrid.appendChild(empty);
+          empty.querySelector('.open-review-modal-btn')?.addEventListener('click', () => {
+            if (reviewModal) {
+              reviewModal.classList.add('is-open');
+              document.body.style.overflow = 'hidden';
+            }
+          });
+          return;
+        }
+
+        reviews.forEach(r => {
+          const card = document.createElement('div');
+          const isHighlight = highlightId && (r.id === highlightId);
+          card.className = `bg-white p-6 rounded-2xl border ${isHighlight ? 'review-just-added border-primary shadow-md' : 'border-stone-200/90 shadow-sm'} flex flex-col justify-between space-y-4 transition-all`;
+
+          let starsHtml = '';
+          for (let i = 1; i <= 5; i++) {
+            starsHtml += `<span class="material-symbols-outlined text-[18px] ${i <= r.rating ? 'text-amber-500 fill-1' : 'text-stone-300'}" style="font-variation-settings: 'FILL' ${i <= r.rating ? 1 : 0};">star</span>`;
+          }
+
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-1">${starsHtml}</div>
+                <span class="text-[11px] font-semibold text-stone-400">${r.date || 'Verified Customer'}</span>
+              </div>
+              <p class="text-sm text-stone-700 leading-relaxed font-normal">"${r.text}"</p>
+            </div>
+            <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
+              <div>
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <h4 class="font-serif font-bold text-sm text-charcoal">${r.name}</h4>
+                  ${isHighlight ? '<span class="text-[10px] bg-primary text-white font-sans font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px]">check</span> Your Review</span>' : '<span class="text-[10px] bg-secondary-light text-secondary font-sans font-bold px-1.5 py-0.5 rounded-full">Verified Client</span>'}
+                </div>
+                <p class="text-xs text-stone-500 mt-0.5">${r.city || 'India'} • <span class="text-primary font-medium">${r.item || 'Custom Embroidery'}</span></p>
+              </div>
+              <span class="w-8 h-8 rounded-full bg-primary/10 text-primary font-serif font-bold text-xs flex items-center justify-center shrink-0">
+                ${(r.name || 'C').charAt(0).toUpperCase()}
+              </span>
+            </div>
+          `;
+          reviewGrid.appendChild(card);
+        });
+      }
+    }
+
+    function updateReviewStats(reviews) {
+      const statsContainer = document.getElementById('review-stats-container');
+      if (!statsContainer) return;
+
+      if (!reviews || reviews.length === 0) {
+        statsContainer.innerHTML = `
+          <span class="text-xs font-bold text-stone-500">Customer Feedback &amp; Experiences</span>
+        `;
+        return;
+      }
+
+      const totalStars = reviews.reduce((sum, r) => sum + (Number(r.rating) || 5), 0);
+      const avg = (totalStars / reviews.length).toFixed(1);
+      const count = reviews.length;
+
+      let starsHtml = '';
+      for (let i = 1; i <= 5; i++) {
+        starsHtml += `<span class="material-symbols-outlined text-[18px] ${i <= Math.round(avg) ? 'text-amber-500 fill-1' : 'text-stone-300'}" style="font-variation-settings: 'FILL' ${i <= Math.round(avg) ? 1 : 0};">star</span>`;
+      }
+
+      statsContainer.innerHTML = `
+        <div class="flex items-center gap-1 text-amber-500 mb-1">
+          ${starsHtml}
+          <span class="text-xs font-bold text-charcoal ml-1.5">${avg} / 5.0 (${count} ${count === 1 ? 'Review' : 'Reviews'})</span>
+        </div>
+      `;
+    }
+
+    if (reviewGrid) loadReviews();
   }
 
-  window.addEventListener('scroll', requestTick, { passive: true });
-  window.addEventListener('resize', requestTick);
-  window.addEventListener('load', requestTick);
-  updateScrollFX();
-  /* ===== Upgrade 1: scroll-driven stitching thread ===== */
-  const stitchSvg = document.getElementById('stitch-thread');
-  if (stitchSvg) {
-    const maskPath = document.getElementById('thread-mask-path');
-    const maskEl = document.getElementById('thread-reveal-mask');
+  /* -------------------------------------------------------------
+     8. Glitch-Free Authentic Hand-Stitched Seam & Needle Engine
+     ------------------------------------------------------------- */
+  function initStitchEngine() {
+    const stitchCanvas = document.getElementById('stitch-canvas');
+    if (!stitchCanvas || reduceMotion) return;
+
     const guidePath = document.getElementById('thread-guide');
+    const puncturePath = document.getElementById('thread-punctures');
     const drawPath = document.getElementById('thread-path');
+    const maskPath = document.getElementById('mask-path');
     const needleEl = document.getElementById('stitch-needle');
     const knotEl = document.getElementById('thread-knot');
     const mainEl = document.querySelector('main');
-    let totalLen = 1;
-    let mTop = 0;
-    let yStart = 0;
-    let yEnd = 1;
-    let maxScroll = 1;
+
+    let totalHeight = 1000;
     let targetFrac = 0;
-    let curFrac = 0;
-    let stitchRaf = null;
-    let rebuildTimer = null;
+    let currentFrac = 0;
+    let rafActive = false;
+    let pathLength = 1;
+    let xOffset = 22;
 
-    const clamp01 = (v) => Math.min(1, Math.max(0, v));
+    function buildStitchPath(silent = false) {
+      if (!mainEl || !drawPath || !guidePath) return;
 
-    function catmullRom(pts) {
-      let d = 'M' + pts[0][0].toFixed(1) + ',' + pts[0][1].toFixed(1);
-      for (let i = 0; i < pts.length - 1; i++) {
-        const p0 = pts[i > 0 ? i - 1 : 0];
-        const p1 = pts[i];
-        const p2 = pts[i + 1];
-        const p3 = pts[i < pts.length - 2 ? i + 1 : pts.length - 1];
-        const c1x = p1[0] + (p2[0] - p0[0]) / 6;
-        const c1y = p1[1] + (p2[1] - p0[1]) / 6;
-        const c2x = p2[0] - (p3[0] - p1[0]) / 6;
-        const c2y = p2[1] - (p3[1] - p1[1]) / 6;
-        d += ' C' + c1x.toFixed(1) + ',' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ',' + c2y.toFixed(1) + ' ' + p2[0].toFixed(1) + ',' + p2[1].toFixed(1);
+      // Calculate height based on the active tab-view
+      const activeView = document.querySelector('.tab-view.active') || mainEl;
+      const rect = activeView.getBoundingClientRect();
+      const h = Math.max(600, Math.round(rect.height));
+      const w = Math.round(mainEl.getBoundingClientRect().width);
+      totalHeight = h;
+
+      const isMobile = window.innerWidth < 768;
+      xOffset = isMobile ? 12 : 22;
+
+      stitchCanvas.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+      const segments = Math.max(14, Math.floor(h / 160));
+      const stepY = h / segments;
+      let d = `M ${xOffset} 12`;
+
+      for (let i = 1; i <= segments; i++) {
+        const y = i * stepY;
+        const wave = Math.sin(i * 1.4) * (isMobile ? 3.5 : 7);
+        const x = xOffset + wave;
+        const prevY = (i - 1) * stepY;
+        const prevWave = Math.sin((i - 1) * 1.4) * (isMobile ? 3.5 : 7);
+        const prevX = xOffset + prevWave;
+
+        const cy1 = prevY + stepY * 0.5;
+        const cy2 = prevY + stepY * 0.5;
+        d += ` C ${prevX} ${cy1}, ${x} ${cy2}, ${x} ${y}`;
       }
-      return d;
-    }
 
-    function fracFromScroll() {
-      const sy = window.pageYOffset || window.scrollY || 0;
-      if (sy >= maxScroll - 1) return 1;
-      const tipMain = sy + window.innerHeight * 0.55 - mTop;
-      return clamp01((tipMain - yStart) / Math.max(1, yEnd - yStart));
-    }
-
-    function applyStitch() {
-      const drawn = curFrac * totalLen;
-      /* reads first: geometry at the tip */
-      let px = 0;
-      let py = 0;
-      let ang = 0;
-      if (drawn > 6) {
-        let p1;
-        let p2;
-        if (drawn >= totalLen - 4) {
-          /* near the end the forward sample would coincide with p1 (atan2(0,0)
-             snaps to horizontal) — sample backwards to keep the tangent */
-          p1 = drawPath.getPointAtLength(Math.max(0, drawn - 4));
-          p2 = drawPath.getPointAtLength(drawn);
-          px = p2.x;
-          py = p2.y;
-        } else {
-          p1 = drawPath.getPointAtLength(drawn);
-          p2 = drawPath.getPointAtLength(Math.min(totalLen, drawn + 4));
-          px = p1.x;
-          py = p1.y;
-        }
-        ang = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
-      }
-      const nearEnd = curFrac >= 0.997;
-      /* writes: transform / stroke-dashoffset / opacity only */
-      maskPath.style.strokeDashoffset = String(totalLen - drawn);
-      knotEl.setAttribute('opacity', nearEnd ? '1' : '0');
-      if (drawn > 6) {
-        /* smaller needle on narrow screens so it clears the 20px text margin */
-        const sc = window.innerWidth < 768 ? 0.58 : 1;
-        needleEl.setAttribute('transform', 'translate(' + px.toFixed(1) + ',' + py.toFixed(1) + ') rotate(' + ang.toFixed(1) + ') scale(' + sc + ') translate(-12,-12)');
-        needleEl.setAttribute('opacity', '1');
-      } else {
-        needleEl.setAttribute('opacity', '0');
-      }
-    }
-
-    function tickStitch() {
-      stitchRaf = null;
-      curFrac += (targetFrac - curFrac) * 0.16;
-      if (Math.abs(targetFrac - curFrac) < 0.0005) curFrac = targetFrac;
-      applyStitch();
-      if (curFrac !== targetFrac) scheduleStitch();
-    }
-
-    function scheduleStitch() {
-      if (stitchRaf === null) stitchRaf = window.requestAnimationFrame(tickStitch);
-    }
-
-    function onScrollStitch() {
-      targetFrac = fracFromScroll();
-      scheduleStitch();
-    }
-
-    function buildThread() {
-      if (!mainEl || !maskPath) return;
-      const rect = mainEl.getBoundingClientRect();
-      const sy = window.pageYOffset || window.scrollY || 0;
-      mTop = rect.top + sy;
-      const w = Math.round(rect.width);
-      const h = Math.round(rect.height);
-      stitchSvg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-      maskEl.setAttribute('x', '-40');
-      maskEl.setAttribute('y', '-40');
-      maskEl.setAttribute('width', String(w + 80));
-      maskEl.setAttribute('height', String(h + 80));
-      const logo = document.querySelector('header a[href="#hero-section"] img');
-      const lRect = logo ? logo.getBoundingClientRect() : { left: 34, bottom: 56, width: 32 };
-      const startX = lRect.left + lRect.width / 2;
-      /* fixed header: viewport coords equal scroll-0 document coords */
-      yStart = lRect.bottom - 4 - mTop;
-      yEnd = Math.max(yStart + 120, h - 6);
-      const vw = window.innerWidth;
-      const narrow = vw < 768;
-      const pad = vw >= 1024 ? 48 : 20;
-      let d;
-      if (narrow) {
-        // Mobile seam path: smoothly connects under logo and stitches down dedicated 34px margin at x = 14px
-        const xSeam = 14;
-        const pts = [[startX, yStart]];
-        // Smooth entry curve from logo hoop into the left margin seam
-        pts.push([startX * 0.65 + xSeam * 0.35, yStart + 25]);
-        pts.push([startX * 0.25 + xSeam * 0.75, yStart + 55]);
-        pts.push([xSeam, yStart + 90]);
-
-        // Hand-stitched organic wave down the mobile seam track
-        const step = 200;
-        let y = yStart + 90 + step;
-        let k = 0;
-        while (y < yEnd - 40) {
-          const xWave = xSeam + Math.sin(k * 1.5) * 1.5;
-          pts.push([xWave, y]);
-          y += step;
-          k++;
-        }
-        pts.push([xSeam, yEnd]);
-        d = catmullRom(pts);
-      } else {
-        const grid = document.getElementById('creations-grid');
-        let gridTop = -1;
-        let gridBottom = -1;
-        if (grid) {
-        const g = grid.getBoundingClientRect();
-        gridTop = g.top + sy - mTop;
-        gridBottom = g.bottom + sy - mTop;
-      }
-      const xA = pad >= 48 ? 16 : 8;
-      const xB = pad - (pad >= 48 ? 8 : 4);
-      const xDeep = pad + (pad >= 48 ? 56 : 24);
-      const step = Math.max(360, Math.min(520, h / 16));
-      const pts = [[startX, yStart]];
-      let y = yStart + Math.min(160, step * 0.4);
-      let k = 0;
-      while (y < yEnd - 40) {
-        const inGrid = y > gridTop && y < gridBottom;
-        let x = (k % 2 === 0) ? xA : (inGrid ? xDeep : xB);
-        x += Math.sin(k * 1.7 + y * 0.002) * 4;
-        pts.push([x, y]);
-        y += step;
-        k++;
-      }
-        pts.push([(k % 2 === 0) ? xA : xB, yEnd]);
-        d = catmullRom(pts);
-      }
       guidePath.setAttribute('d', d);
+      if (puncturePath) puncturePath.setAttribute('d', d);
       drawPath.setAttribute('d', d);
-      maskPath.setAttribute('d', d);
-      totalLen = maskPath.getTotalLength() || 1;
-      maskPath.style.strokeDasharray = String(totalLen);
-      const endPt = maskPath.getPointAtLength(totalLen);
-      knotEl.setAttribute('transform', 'translate(' + endPt.x.toFixed(1) + ',' + endPt.y.toFixed(1) + ')');
-      maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      if (reduceMotion) {
-        maskPath.style.strokeDashoffset = '0';
-        needleEl.setAttribute('opacity', '0');
-        knotEl.setAttribute('opacity', '1');
+      if (maskPath) maskPath.setAttribute('d', d);
+
+      const refPath = maskPath || drawPath;
+      pathLength = refPath.getTotalLength() || h;
+
+      if (maskPath) {
+        maskPath.style.strokeDasharray = `${pathLength}`;
+        maskPath.style.strokeDashoffset = `${pathLength}`;
       } else {
-        targetFrac = fracFromScroll();
-        curFrac = targetFrac;
-        applyStitch();
-        scheduleStitch();
+        drawPath.style.strokeDasharray = `${pathLength}`;
+        drawPath.style.strokeDashoffset = `${pathLength}`;
+      }
+
+      if (knotEl) {
+        knotEl.setAttribute('cx', String(xOffset));
+        knotEl.setAttribute('cy', '12');
+      }
+
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const vh = window.innerHeight;
+      const focalY = scrollY + vh * 0.45;
+      targetFrac = Math.min(1, Math.max(0, focalY / Math.max(1, totalHeight)));
+
+      if (silent) {
+        currentFrac = targetFrac;
+        renderStitchFrame();
+      } else {
+        updateScrollPosition();
       }
     }
 
-    function queueRebuild() {
-      if (rebuildTimer) clearTimeout(rebuildTimer);
-      rebuildTimer = setTimeout(buildThread, 120);
+    window._rebuildStitch = buildStitchPath;
+
+    function renderStitchFrame() {
+      const offset = pathLength * (1 - currentFrac);
+      if (maskPath) {
+        maskPath.style.strokeDashoffset = `${offset.toFixed(1)}`;
+      } else {
+        drawPath.style.strokeDashoffset = `${offset.toFixed(1)}`;
+      }
+
+      if (needleEl) {
+        if (currentFrac > 0.002 && currentFrac < 0.998) {
+          const targetDist = pathLength * currentFrac;
+          const refPath = maskPath || drawPath;
+          const pt = refPath.getPointAtLength(targetDist);
+          const ptNext = refPath.getPointAtLength(Math.min(pathLength, targetDist + 3));
+
+          const angleDeg = Math.atan2(ptNext.y - pt.y, ptNext.x - pt.x) * (180 / Math.PI);
+          const pierce = Math.sin((targetDist / 21) * Math.PI * 2) * 5.5;
+          const scale = window.innerWidth < 768 ? 0.95 : 1.15;
+
+          needleEl.style.transform = `translate3d(${pt.x.toFixed(1)}px, ${pt.y.toFixed(1)}px, 0) rotate(${(angleDeg + pierce).toFixed(1)}deg) scale(${scale})`;
+          needleEl.style.opacity = '1';
+        } else {
+          needleEl.style.opacity = '0';
+        }
+      }
     }
 
-    buildThread();
-    if (!reduceMotion) {
-      window.addEventListener('scroll', onScrollStitch, { passive: true });
+    function updateScrollPosition(instant = false) {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const vh = window.innerHeight;
+      const focalY = scrollY + vh * 0.45;
+      targetFrac = Math.min(1, Math.max(0, focalY / Math.max(1, totalHeight)));
+
+      if (instant) {
+        currentFrac = targetFrac;
+        renderStitchFrame();
+        return;
+      }
+
+      if (!rafActive) {
+        rafActive = true;
+        window.requestAnimationFrame(animateStitch);
+      }
     }
-    window.addEventListener('resize', queueRebuild);
-    window.addEventListener('load', queueRebuild);
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(queueRebuild).catch(function () {});
+
+    function animateStitch() {
+      currentFrac += (targetFrac - currentFrac) * 0.35;
+      if (Math.abs(targetFrac - currentFrac) < 0.0008) {
+        currentFrac = targetFrac;
+      }
+
+      renderStitchFrame();
+
+      if (currentFrac !== targetFrac) {
+        window.requestAnimationFrame(animateStitch);
+      } else {
+        rafActive = false;
+      }
     }
+
+    if (!window._stitchListenersAttached) {
+      window._stitchListenersAttached = true;
+
+      window.addEventListener('scroll', () => {
+        if (typeof window._rebuildStitch === 'function') {
+          updateScrollPosition(false);
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        clearTimeout(window._resizeTimer);
+        window._resizeTimer = setTimeout(() => {
+          if (typeof window._rebuildStitch === 'function') {
+            window._rebuildStitch(true);
+          }
+        }, 80);
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && typeof window._rebuildStitch === 'function') {
+          window._rebuildStitch(true);
+          updateScrollPosition(true);
+        }
+      });
+    }
+
+    if (window._stitchRO) window._stitchRO.disconnect();
     if ('ResizeObserver' in window && mainEl) {
-      new ResizeObserver(queueRebuild).observe(mainEl);
+      let lastHeight = 0;
+      window._stitchRO = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const h = Math.round(entry.contentRect.height);
+          if (Math.abs(h - lastHeight) > 6) {
+            lastHeight = h;
+            clearTimeout(window._stitchRoTimer);
+            window._stitchRoTimer = setTimeout(() => {
+              buildStitchPath(true);
+            }, 60);
+          }
+        }
+      });
+      window._stitchRO.observe(mainEl);
     }
+
+    buildStitchPath(true);
   }
+
+  /* -------------------------------------------------------------
+     9. Instantaneous Client-Side Tab Routing (Zero-Flicker Architecture)
+     ------------------------------------------------------------- */
+  const tabTitles = {
+    home: 'Dreamy Needle — Handcrafted Embroidery by Shruti | Mumbai Atelier',
+    creations: 'Creations & Gallery (11 Styles) — Dreamy Needle Atelier',
+    'custom-order': 'Custom Embroidery Ordering & Pricing Guide — Dreamy Needle',
+    about: 'About Studio & Shruti — Dreamy Needle Atelier',
+    contact: 'Contact Atelier & FAQ — Dreamy Needle'
+  };
+
+  const tabUrls = {
+    home: 'index.html',
+    creations: 'creations.html',
+    'custom-order': 'custom-order.html',
+    about: 'about.html',
+    contact: 'contact.html',
+    reviews: 'index.html#reviews-section'
+  };
+
+  window.switchTab = switchTab;
+  async function switchTab(tabId, pushState = true, scrollToTop = true) {
+    const isReviews = (tabId === 'reviews');
+    const viewTargetId = isReviews ? 'home' : tabId;
+
+    let targetView = document.getElementById(`view-${viewTargetId}`);
+
+    // Dynamic partial fetch fallback if view not pre-mounted
+    if (!targetView) {
+      const url = tabUrls[viewTargetId] || `${viewTargetId}.html`;
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          const htmlText = await res.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(htmlText, 'text/html');
+          const fetchedView = doc.getElementById(`view-${tabId}`) || doc.querySelector('main');
+          if (fetchedView) {
+            const viewDiv = document.createElement('div');
+            viewDiv.id = `view-${tabId}`;
+            viewDiv.className = 'tab-view view-hidden';
+            viewDiv.setAttribute('data-view', tabId);
+            const canvasInFetched = fetchedView.querySelector('#stitch-canvas');
+            if (canvasInFetched) canvasInFetched.remove();
+            viewDiv.innerHTML = fetchedView.innerHTML;
+            document.querySelector('main')?.appendChild(viewDiv);
+            targetView = viewDiv;
+          }
+        }
+      } catch (e) {
+        // file:// CORS fallback
+        window.location.href = url;
+        return;
+      }
+    }
+
+    if (!targetView) {
+      window.location.href = tabUrls[tabId] || `${tabId}.html`;
+      return;
+    }
+
+    // 1. Instant Tab View Switching
+    document.querySelectorAll('.tab-view').forEach(view => {
+      if (view === targetView) {
+        view.classList.remove('view-hidden');
+        view.classList.add('active', 'view-enter');
+        setTimeout(() => view.classList.remove('view-enter'), 280);
+      } else {
+        view.classList.remove('active', 'view-enter');
+        view.classList.add('view-hidden');
+      }
+    });
+
+    // 2. Smooth Desktop Nav Indicators (Zero-Blink)
+    document.querySelectorAll('#desktop-nav .nav-link').forEach(link => {
+      const isTarget = link.getAttribute('data-tab') === tabId;
+      link.classList.toggle('active', isTarget);
+      link.classList.toggle('text-primary', isTarget);
+      link.classList.toggle('font-bold', isTarget);
+    });
+
+    // 3. Smooth Mobile Drawer Nav Indicators
+    document.querySelectorAll('#mobile-nav .mobile-nav-link').forEach(link => {
+      const isTarget = link.getAttribute('data-tab') === tabId;
+      if (isTarget) {
+        link.className = 'mobile-nav-link text-primary font-bold py-2.5 px-3 rounded-xl bg-primary/10 text-sm flex items-center justify-between transition-colors';
+      } else {
+        link.className = 'mobile-nav-link text-stone-700 hover:text-primary hover:bg-stone-100/80 py-2.5 px-3 rounded-xl text-sm flex items-center justify-between transition-colors';
+      }
+    });
+
+    // 4. Update Document Title
+    if (tabTitles[tabId]) {
+      document.title = tabTitles[tabId];
+    }
+
+    // 5. Update Browser History with Clean URLs
+    if (pushState) {
+      let targetUrl = tabUrls[tabId] || `${tabId}.html`;
+      try {
+        if (window.location.protocol === 'file:') {
+          history.pushState({ tab: tabId }, '', `#${tabId}`);
+        } else {
+          if (!window.location.pathname.endsWith('.html') && tabId !== 'reviews') {
+            targetUrl = (tabId === 'home') ? '/' : `${tabId}`;
+          }
+          history.pushState({ tab: tabId }, '', targetUrl);
+        }
+      } catch (e) {
+        location.hash = tabId;
+      }
+    }
+
+    // 6. Scroll Position
+    if (isReviews) {
+      setTimeout(() => {
+        const revSec = document.getElementById('reviews-section');
+        if (revSec) revSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 70);
+    } else if (scrollToTop) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // 7. Close Mobile Drawer
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      const menuToggle = document.getElementById('menu-toggle');
+      if (menuToggle) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        const icon = menuToggle.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = 'menu';
+      }
+    }
+
+    // 8. Re-seat stitch seam smoothly to new view height
+    if (typeof window._rebuildStitch === 'function') {
+      requestAnimationFrame(() => {
+        window._rebuildStitch(true);
+      });
+    }
+
+    // 9. Re-observe above-fold reveals in newly active view
+    initRevealObserver();
+
+    // 10. Enhance any select dropdowns in newly active view
+    initCustomSelects();
+  }
+
+  function detectTabFromUrl(href) {
+    if (!href) return 'home';
+    const [path, hash] = href.split('#');
+    if (hash === 'reviews-section' || hash === 'reviews') return 'reviews';
+    if (hash && document.getElementById(`view-${hash}`)) return hash;
+
+    const file = path.split('/').pop().toLowerCase();
+    if (file.includes('creation')) return 'creations';
+    if (file.includes('custom') || file.includes('order')) return 'custom-order';
+    if (file.includes('about')) return 'about';
+    if (file.includes('contact')) return 'contact';
+    if (file.includes('index') || file === '' || file === '/') return 'home';
+
+    return 'home';
+  }
+
+  function initSmoothPageNavigation() {
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      // Ignore external or protocol links
+      if (
+        href.startsWith('http://') ||
+        href.startsWith('https://') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        link.getAttribute('target') === '_blank' ||
+        link.hasAttribute('download')
+      ) {
+        return;
+      }
+
+      const dataTab = link.getAttribute('data-tab');
+      if (dataTab) {
+        e.preventDefault();
+        switchTab(dataTab, true, true);
+        return;
+      }
+
+      const targetTab = detectTabFromUrl(href);
+      if (targetTab) {
+        e.preventDefault();
+        switchTab(targetTab, true, targetTab !== 'reviews');
+      }
+    });
+
+    window.addEventListener('popstate', (e) => {
+      const tabId = (e.state && e.state.tab) || detectTabFromUrl(window.location.href);
+      switchTab(tabId, false, false);
+    });
+  }
+
+  /* -------------------------------------------------------------
+     Master Initializer
+     ------------------------------------------------------------- */
+  function initAllPageComponents() {
+    initRevealObserver();
+    initCustomSelects();
+    initCategoryFilterPills();
+    initFaqAccordions();
+    initWhatsAppOrderBuilder();
+    initReviewSystem();
+    initStitchEngine();
+  }
+
+  initMobileMenu();
+  initSmoothPageNavigation();
+  initAllPageComponents();
+
+  // Route to initial active tab on page load
+  const initialTab = detectTabFromUrl(window.location.href);
+  switchTab(initialTab, false, false);
 });

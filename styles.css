@@ -1,229 +1,175 @@
-@layer base{html,body{margin:0;padding:0;overflow-x:hidden;max-width:100vw;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#b95469 #f7f3ec;overscroll-behavior-y:none;}
-.no-scrollbar::-webkit-scrollbar{display:none;}
-.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
-::-webkit-scrollbar{width:10px;height:10px;}
-::-webkit-scrollbar-track{background:#f7f3ec;}
-::-webkit-scrollbar-thumb{background:#b95469;border-radius:9999px;border:2px solid #f7f3ec;}
-::-webkit-scrollbar-thumb:hover{background:#9a3c51;}
-section[id],div[id]{scroll-margin-top:5.5rem;}
-/* Artisanal Needlecraft Animations */
-@keyframes heroFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(0.8deg); }
-}
-@keyframes gentlePulseGlow {
-  0%, 100% { box-shadow: 0 10px 30px -10px rgba(154, 60, 81, 0.25); }
-  50% { box-shadow: 0 18px 40px -6px rgba(154, 60, 81, 0.45); }
-}
-@keyframes sparkleFloat {
-  0% { transform: translateY(0px) rotate(0deg) scale(0.9); opacity: 0.35; }
-  50% { transform: translateY(-12px) rotate(18deg) scale(1.1); opacity: 0.85; }
-  100% { transform: translateY(0px) rotate(0deg) scale(0.9); opacity: 0.35; }
-}
-@keyframes stitchDash {
-  to { stroke-dashoffset: -40; }
-}
-@keyframes shimmerShine {
-  0% { transform: translateX(-150%) skewX(-20deg); }
-  100% { transform: translateX(250%) skewX(-20deg); }
+/* ============================================================
+   Dreamy Needle — Artisanal Embroidery by Shruti
+   Refined styling, prominent zero-lag scroll stitch & mobile UX
+   ============================================================ */
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    max-width: 100vw;
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
 }
 
-.hero-hoop-float {
-  animation: heroFloat 6s ease-in-out infinite;
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: transform;
-}
-.btn-shimmer {
-  position: relative;
-  overflow: hidden;
-}
-.btn-shimmer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
-  transform: translateX(-150%) skewX(-20deg);
-  pointer-events: none;
-}
-.btn-shimmer:hover::after {
-  animation: shimmerShine 1.25s infinite;
+/* Remove vertical and horizontal scrollbars everywhere */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
 }
 
-/* Creation Card Hover Effects */
+/* Base custom font helper */
+.font-script {
+  font-family: 'Great Vibes', 'Playfair Display', cursive;
+}
+
+/* Mobile-first safe indentation so content never collides with stitch seam */
+.page-container {
+  padding-left: 1.85rem;
+  padding-right: 1.15rem;
+}
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: 2.75rem;
+    padding-right: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .page-container {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+}
+
+/* Creation Card Hover & Touch States */
 .creation-card {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease, opacity 0.3s ease;
-  border: 1px solid transparent;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+  border: 1px solid rgba(220, 210, 200, 0.7);
+  background: #ffffff;
 }
 .creation-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 35px -10px rgba(78, 50, 40, 0.12);
-  border-color: rgba(185, 84, 105, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px -10px rgba(78, 50, 40, 0.1);
+  border-color: rgba(154, 60, 81, 0.35);
+}
+.creation-card.filter-hidden {
+  display: none !important;
+}
+
+.card-arrow {
+  transition: transform 0.2s ease;
 }
 .creation-card:hover .card-arrow {
   transform: translateX(4px);
 }
-.card-arrow {
-  transition: transform 0.25s ease;
-}
 
-/* Scroll reveal utility — hidden only when JS is available */
-.has-js .reveal-init {
-  opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: var(--d, 0ms);
-}
-.has-js .reveal-init.reveal-visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-  will-change: opacity, transform;
-}
-
-/* ===== SCROLL ANIMATION SYSTEM ===== */
-
-/* E. "Fabric curtain" reveal for catalog card images — transform-only (GPU),
-   no main-thread clip-path painting while cards are fading in */
-.has-js .creation-card.reveal-init > div:first-child::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: #ffffff;
-  transform: translateY(0);
-  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d, 0ms) + 100ms);
-}
-.has-js .creation-card.reveal-init.reveal-visible > div:first-child::after {
-  transform: translateY(101%);
-}
-
-/* B-2. Eyebrow labels draw a brass dashed stitch underline on reveal */
-.has-js span.font-label-sm.uppercase.tracking-widest:not(.flex) {
-  position: relative;
-}
-.has-js span.font-label-sm.uppercase.tracking-widest:not(.flex)::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -7px;
-  height: 2px;
-  background-image: repeating-linear-gradient(90deg, #c89b53 0 6px, transparent 6px 13px);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d, 0ms) + 300ms);
-}
-.has-js .reveal-visible span.font-label-sm.uppercase.tracking-widest:not(.flex)::after {
-  transform: scaleX(1);
-}
-
-/* A. Thread scroll-progress bar with riding needle */
-#thread-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  z-index: 60;
-  pointer-events: none;
-}
-#thread-fill {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #9a3c51, #b95469 55%, #c89b53);
-  transform: scaleX(0);
-  transform-origin: left center;
-  will-change: transform;
-}
-.thread-needle {
-  position: absolute;
-  top: -6px;
-  left: 0;
-  width: 15px;
-  height: 15px;
-  filter: drop-shadow(0 1px 2px rgba(78, 50, 40, 0.4));
-  will-change: transform;
-}
-
-/* B-1. Self-stitching thread connector through the How-to-Order steps */
-#steps-grid {
-  position: relative;
-}
-#step-thread {
-  position: absolute;
-  top: 56px;
-  left: 56px;
-  right: 56px;
-  height: 2px;
-  z-index: 0;
-  pointer-events: none;
-  background-image: repeating-linear-gradient(90deg, #c89b53 0 7px, transparent 7px 15px);
-  clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0);
-}
-@media (max-width: 767px) {
-  #step-thread {
-    top: 40px;
-    bottom: 40px;
-    left: 26px;
-    right: auto;
-    width: 2px;
-    height: auto;
-    background-image: repeating-linear-gradient(180deg, #c89b53 0 7px, transparent 7px 15px);
-    clip-path: inset(0 0 calc((1 - var(--p, 0)) * 100%) 0);
-  }
-}
-
-/* DESIGN.md — hand-stitched dashed basting border on hover */
-.creation-card,
-.step-card,
-#fabrics .grid > div {
-  position: relative;
-}
+/* Gentle subtle basting border on hover */
 .creation-card::after,
-.step-card::after,
-#fabrics .grid > div::after {
+.info-card::after {
   content: '';
   position: absolute;
   inset: 6px;
-  border: 1px dashed #1c1c18;
-  border-radius: 0.65rem;
+  border: 1px dashed rgba(154, 60, 81, 0.25);
+  border-radius: 0.75rem;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 }
-#fabrics .grid > div::after {
-  inset: 5px;
-  border-radius: 1.1rem;
-}
 .creation-card:hover::after,
-.step-card:hover::after,
-#fabrics .grid > div:hover::after {
+.info-card:hover::after {
   opacity: 1;
 }
 
-/* Mobile slide-down menu */
+/* Seamless Single-Page Tab Views (Zero-Flicker Transitions) */
+.tab-view {
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.tab-view.view-hidden {
+  display: none !important;
+}
+.tab-view.view-enter {
+  animation: tabViewEnter 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes tabViewEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Elegant Smooth Sliding Desktop Navigation Indicator (Zero-Blink) */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+  padding-bottom: 0.25rem;
+}
+.nav-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background-color: #9a3c51;
+  border-radius: 9999px;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+.nav-link:not(.active) .nav-indicator {
+  opacity: 0;
+  transform: scaleX(0.2);
+  pointer-events: none;
+}
+.nav-link.active .nav-indicator {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Smooth, delicate section entrance */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+  will-change: opacity, transform;
+}
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Beautiful Mobile Navigation Drawer Dropdown */
 #mobile-menu {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  opacity: 0;
+  box-shadow: 0 16px 32px -6px rgba(45, 30, 25, 0.12);
+  border-bottom: 1px solid rgba(220, 210, 200, 0.8);
 }
 #mobile-menu.open {
-  max-height: 420px;
+  max-height: 520px;
+  opacity: 1;
 }
 #menu-toggle .material-symbols-outlined {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-#menu-toggle[aria-expanded="true"] .material-symbols-outlined {
-  transform: rotate(90deg);
+  transition: transform 0.25s ease;
 }
 
-/* Accordion transition styles */
+/* Interactive FAQ Accordion */
 .faq-content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
   opacity: 0;
 }
 .faq-content.is-open {
@@ -233,173 +179,381 @@ section[id],div[id]{scroll-margin-top:5.5rem;}
 .faq-content-inner {
   overflow: hidden;
 }
+.faq-trigger {
+  transition: color 0.2s ease;
+}
+.faq-trigger:hover {
+  color: #9a3c51;
+}
 .faq-icon {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .faq-icon.is-open {
   transform: rotate(180deg);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .has-js .reveal-init {
-    opacity: 1;
-    transform: none;
-  }
-  .has-js .creation-card.reveal-init > div:first-child::after {
-    content: none;
-  }
-}
-
 /* ============================================================
-   Upgrade 1: Scroll-driven stitching thread
+   Authentic Hand-Embroidered Running Stitch Seam
+   Real cotton thread dashes, fabric punctures & sewing needle
    ============================================================ */
 main {
   position: relative;
 }
-#stitch-thread {
+
+#stitch-canvas {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
   pointer-events: none;
+  z-index: 25;
   overflow: visible;
+  opacity: 1;
+  transition: opacity 0.25s ease;
 }
-@media (max-width: 767px) {
-  .px-margin-mobile {
-    padding-left: 2.15rem !important;
-    padding-right: 1.15rem !important;
+
+/* Faint tailor's chalk guide line marking the pattern */
+#thread-guide {
+  stroke: #c89b53;
+  stroke-width: 1.2px;
+  stroke-dasharray: 4 6;
+  stroke-opacity: 0.32;
+}
+
+/* Fabric needle piercings (tiny indents where thread enters/exits cloth) */
+#thread-punctures {
+  stroke: rgba(78, 50, 40, 0.32);
+  stroke-width: 2.2px;
+  stroke-dasharray: 2 19;
+  stroke-linecap: round;
+}
+
+/* Authentic hand embroidery running stitch: 13px thread, 8px space */
+#thread-path {
+  stroke: #9a3c51; /* Rich DMC crimson cotton floss */
+  stroke-width: 3.2px;
+  stroke-linecap: round;
+  stroke-dasharray: 13 8;
+  filter: drop-shadow(0 1.5px 2px rgba(154, 60, 81, 0.4));
+}
+
+/* Progressive reveal mask */
+#mask-path {
+  stroke: #ffffff;
+  stroke-width: 28px;
+  stroke-linecap: round;
+}
+
+/* Starting anchor knot */
+#thread-knot {
+  fill: #9a3c51;
+  stroke: #6b2131;
+  stroke-width: 0.8px;
+  filter: drop-shadow(0 1px 2px rgba(78, 50, 40, 0.4));
+}
+
+.stitch-needle-wrap {
+  will-change: transform, opacity;
+  transform-origin: 0 0;
+  transition: opacity 0.2s ease;
+  filter: drop-shadow(0 3px 6px rgba(78, 50, 40, 0.42));
+}
+
+/* Review Star Rating Component */
+.star-rating-btn {
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+.star-rating-btn:hover {
+  transform: scale(1.18);
+}
+
+/* Review Card Highlight on Submission */
+@keyframes reviewPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(154, 60, 81, 0.55);
+    border-color: rgba(154, 60, 81, 0.9);
+    background-color: #fff9f9;
+    transform: scale(1.02);
+  }
+  60% {
+    box-shadow: 0 0 0 12px rgba(154, 60, 81, 0);
+    border-color: rgba(154, 60, 81, 0.7);
+    background-color: #fffcfc;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(154, 60, 81, 0);
+    border-color: rgba(220, 210, 200, 0.9);
+    background-color: #ffffff;
+    transform: scale(1);
   }
 }
-#thread-knot,
-#stitch-needle {
-  will-change: transform, opacity;
-  transition: opacity 0.35s ease;
+.review-just-added {
+  animation: reviewPulse 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.creation-card,
-.step-card,
-#fabrics .grid > div {
-  z-index: 2;
+
+/* Modal Dialog */
+.modal-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-panel {
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-backdrop.is-open .modal-panel {
+  transform: translateY(0) scale(1);
+}
+
+/* Mobile-Friendly Form Inputs & Artisanal Select Dropdowns */
+input, select, textarea {
+  font-size: 16px !important; /* Prevents auto-zoom on iOS Safari */
+}
+
+select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%239a3c51' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-position: right 1rem center !important;
+  background-repeat: no-repeat !important;
+  background-size: 1.15rem !important;
+  padding-right: 2.75rem !important;
+  cursor: pointer;
+  background-color: #fcfbf9;
+  border: 1.5px solid #ded6cc !important;
+  border-radius: 0.85rem !important;
+  color: #23201e;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+select:hover {
+  border-color: #c98493 !important;
+  background-color: #ffffff;
+}
+
+select:focus {
+  outline: none !important;
+  border-color: #9a3c51 !important;
+  box-shadow: 0 0 0 3px rgba(154, 60, 81, 0.15) !important;
+  background-color: #ffffff;
+}
+
+select option {
+  background-color: #ffffff;
+  color: #23201e;
+  padding: 10px 14px;
 }
 
 /* ============================================================
-   Upgrade 2: Floating WhatsApp button
+   Artisanal Custom Select Dropdown UI
+   Replaces native browser popup with a luxury boutique menu
    ============================================================ */
+.custom-select-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background-color: #fcfbf9;
+  border: 1.5px solid #ded6cc;
+  border-radius: 0.85rem;
+  color: #23201e;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  user-select: none;
+  text-align: left;
+}
+
+.custom-select-trigger:hover {
+  border-color: #c98493;
+  background-color: #ffffff;
+}
+
+.custom-select-trigger:focus-visible,
+.custom-select-wrap.is-open .custom-select-trigger {
+  outline: none;
+  border-color: #9a3c51;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(154, 60, 81, 0.15);
+}
+
+.custom-select-arrow {
+  color: #9a3c51;
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.custom-select-wrap.is-open .custom-select-arrow {
+  transform: rotate(180deg);
+}
+
+.custom-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 80;
+  background-color: #ffffff;
+  border: 1px solid rgba(220, 210, 200, 0.95);
+  border-radius: 1rem;
+  box-shadow: 0 16px 36px -6px rgba(45, 30, 25, 0.18), 0 4px 14px rgba(0, 0, 0, 0.06);
+  padding: 0.4rem;
+  max-height: 250px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top center;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+  scrollbar-width: thin;
+}
+
+.custom-select-wrap.is-open .custom-select-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.custom-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.65rem;
+  font-size: 0.875rem;
+  color: #373330;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.custom-select-option:hover,
+.custom-select-option.is-highlighted {
+  background-color: rgba(154, 60, 81, 0.08);
+  color: #9a3c51;
+  font-weight: 600;
+}
+
+.custom-select-option.is-selected {
+  background-color: #9a3c51;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(154, 60, 81, 0.25);
+}
+
+.custom-select-option .custom-option-check {
+  font-size: 18px;
+  line-height: 1;
+  display: none;
+}
+
+.custom-select-option.is-selected .custom-option-check {
+  display: block;
+  color: #ffffff;
+}
+
+.custom-select-native-hidden {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
+
+/* WhatsApp Floating Action Button */
 .wa-fab {
   position: fixed;
-  right: 1.25rem;
-  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
-  width: 54px;
-  height: 54px;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  width: 50px;
+  height: 50px;
   border-radius: 9999px;
   background: #128C72;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 40;
-  box-shadow: 0 10px 26px -8px rgba(18, 140, 114, 0.55), 0 4px 10px -3px rgba(78, 50, 40, 0.28);
+  z-index: 45;
+  box-shadow: 0 8px 24px -4px rgba(18, 140, 114, 0.5);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .wa-fab {
-    width: 48px;
-    height: 48px;
-    right: 1rem;
-    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    right: 1.5rem;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    width: 54px;
+    height: 54px;
   }
-}
-.wa-fab > svg {
-  width: 28px;
-  height: 28px;
-  display: block;
-  position: relative;
-  z-index: 1;
-}
-@media (max-width: 767px) {
-  .wa-fab > svg {
-    width: 24px;
-    height: 24px;
-  }
-}
-.wa-fab::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 2px solid #128C72;
-  pointer-events: none;
-  animation: wa-fab-pulse 1.8s ease-out 2 forwards;
-}
-@keyframes wa-fab-pulse {
-  0% { transform: scale(1); opacity: 0.7; }
-  100% { transform: scale(1.9); opacity: 0; }
 }
 .wa-fab:hover {
-  transform: scale(1.07);
-  box-shadow: 0 14px 32px -8px rgba(18, 140, 114, 0.65), 0 6px 14px -3px rgba(78, 50, 40, 0.3);
+  transform: scale(1.06);
+  box-shadow: 0 12px 28px -4px rgba(18, 140, 114, 0.65);
 }
-.wa-fab:focus-visible {
-  outline: 3px solid #9a3c51;
-  outline-offset: 3px;
+.wa-fab > svg {
+  width: 26px;
+  height: 26px;
+  display: block;
 }
 .wa-fab-label {
   position: absolute;
-  right: calc(100% + 12px);
+  right: calc(100% + 10px);
   top: 50%;
-  transform: translate(8px, -50%);
-  background: #1c1c18;
+  transform: translate(6px, -50%);
+  background: #23201e;
   color: #fdf9f2;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  padding: 7px 12px;
+  padding: 6px 12px;
   border-radius: 8px;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 .wa-fab:hover .wa-fab-label,
 .wa-fab:focus-visible .wa-fab-label {
   transform: translate(0, -50%);
   opacity: 1;
 }
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid #9a3c51;
-  outline-offset: 2px;
-}
-@media (max-width: 767px) {
-  .wa-fab-label {
-    display: none;
-  }
-}
 
-/* Reduced motion: static full thread, no needle, no pulse */
+/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  #stitch-needle {
+  html {
+    scroll-behavior: auto;
+  }
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .stitch-needle-wrap {
     display: none !important;
   }
-  #thread-knot {
-    transition: none !important;
-  }
-  .wa-fab::after {
-    animation: none !important;
-    opacity: 0;
-  }
-  .wa-fab:hover {
-    transform: none;
-  }
-  .wa-fab-label {
-    transition: none;
+  #thread-path {
+    stroke-dashoffset: 0 !important;
   }
 }
