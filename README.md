@@ -35,23 +35,15 @@ dreamy-needle/
 ├── vercel.json             # Vercel deployment config (clean URLs, caching, API rewrites)
 ├── package.json            # Node.js project manifest & scripts
 ├── server.js               # Lightweight Node.js local development server
-├── server.py               # Lightweight Python 3 local development server
-└── .gitignore              # Ignores .vercel, node_modules, and test scratch files
+└── .gitignore              # Ignores .vercel, node_modules, and test files
 ```
 
 ---
 
 ## 🚀 Quick Start (Local Development)
 
-### Using Node.js
 ```bash
 npm start
-# Server runs at http://localhost:8000
-```
-
-### Using Python
-```bash
-python server.py
 # Server runs at http://localhost:8000
 ```
 

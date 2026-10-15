@@ -4,7 +4,8 @@
   "description": "Dreamy Needle — Bespoke Handcrafted Embroidery by Shruti Atelier",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js 8000"
+    "dev": "node server.js 8000",
+    "manage-reviews": "node manage-reviews.js"
   },
   "keywords": [
     "embroidery",
