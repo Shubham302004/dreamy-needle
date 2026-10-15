@@ -469,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#201a16] text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-3 border border-stone-700/80';
         toast.innerHTML = `
           <span class="material-symbols-outlined text-[#34d399] text-[20px]">check_circle</span>
-          <span>Thank you, <strong>${name}</strong>! Your review has been saved in reviews.json.</span>
+          <span>Thank you, <strong>${name}</strong>! Your review has been shared with the studio.</span>
         `;
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 4500);
